@@ -242,14 +242,14 @@
     </div>
 
     <script>
-        const CORRECT_NAME = "piddu"; 
+        const CORRECT_NAME = "Chomu"; 
 
         const wrongAnswersList = [
-            "Oyee chomu sahi naam likho! 😤",
-            "Arey yaara! bhool gye apna naam? 🥺",
-            "Wrong password buddhu! ❌",
+            "Bhondu sahi naam likho! 😤",
+            "Ap apna name bhul gya betu🥺?",
+            "Wrong password kuchupuchu! ❌",
             "Nooo, that's not you! 🤔",
-            "Sahi naam dalo varna gift nhi milega 🎁"
+            "Sahi naam dalo varna gift noi milega 🎁"
         ];
 
         const enterBtn = document.getElementById('enterBtn');
@@ -270,7 +270,7 @@
                 const randomLine = wrongAnswersList[Math.floor(Math.random() * wrongAnswersList.length)];
                 lockHeading.innerText = randomLine;
                 lockHeading.style.color = "#d90429"; 
-                lockHint.innerText = "Try again clearly... 🤫";
+                lockHint.innerText = "Try again betu... 🤫";
                 lockHint.style.color = "#d90429";
                 passwordInput.style.borderColor = '#d90429';
                 passwordInput.value = ''; 
