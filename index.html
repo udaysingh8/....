@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Piduu! 🦄✨</title>
+    <style>
+        /* Acoustic Pastel Pink Aesthetic */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 50%, #ffb3c6 100%);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --text-main: #ff4d6d;
+            --text-dark: #c9184a;
+            --btn-yes: #ff758f;
+            --btn-no: #fff0f3;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating Background Elements */
+        .floating-element {
+            position: absolute;
+            font-size: 24px;
+            pointer-events: none;
+            opacity: 0.75;
+            animation: floatUp 6s linear infinite;
+            bottom: -50px;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% {
+                transform: translateY(-110vh) translateX(50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main Acoustic Card */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            width: 90%;
+            max-width: 360px;
+            padding: 30px 20px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            text-align: center;
+            z-index: 10;
+            transition: all 0.4s ease;
+        }
+
+        /* Cute Title and Emoji Headers */
+        .header-emojis {
+            font-size: 40px;
+            margin-bottom: 10px;
+            display: block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        h1 {
+            color: var(--text-main);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        /* Center Media/Image Box */
+        .image-container {
+            width: 100%;
+            height: 180px;
+            background: #ffe5ec;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px dashed var(--btn-yes);
+            position: relative;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-placeholder {
+            font-size: 50px;
+        }
+
+        p {
+            color: var(--text-dark);
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
+
+        /* Buttons Structure */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .btn-yes {
+            background: var(--btn-yes);
+            color: white;
+        }
+
+        .btn-yes:active {
+            transform: scale(0.98);
+        }
+
+        .btn-no {
+            background: var(--btn-no);
+            color: var(--text-main);
+            border: 1px solid var(--text-main);
+            position: relative;
+        }
+
+        /* Success State */
+        .hidden {
+            display: none !important;
+        }
+
+        .success-title {
+            color: var(--text-dark);
+            font-size: 26px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <span class="header-emojis">🦄🧸💖</span>
+        <h1 id="titleText">Happy Birthday, My Best View! 🎉</h1>
+        
+        <div class="image-container">
+            <img src="birthday.jpg" alt="💖" onerror="this.style.display='none'; document.getElementById('placeholder').classList.remove('hidden')">
+            <div id="placeholder" class="image-placeholder hidden">🎂</div>
+        </div>
+
+        <p id="subText">Will you go out on a magical birthday date with me? ✨</p>
+
+        <div class="btn-group">
+            <button class="btn btn-yes" id="yesBtn">Yes, absolutely! 🌸</button>
+            <button class="btn btn-no" id="noBtn">No 🥺</button>
+        </div>
+    </div>
+
+    <div class="card hidden" id="successCard">
+        <span class="header-emojis" style="font-size: 60px;">🥳✨👑</span>
+        <h1 class="success-title">YAYYYYY! 🥰</h1>
+        <p style="margin-top: 15px; font-size: 16px;">Get ready for the best birthday ever! Prepared with honesty just for you. 🦄💖🎒</p>
+    </div>
+
+    <script>
+        // Array of cute emojis to float in the background
+        const emojis = ['🌸', '💖', '🦄', '🧸', '✨', '🎈', '🍭', '🍓'];
+
+        function createFloatingEmoji() {
+            const emoji = document.createElement('div');
+            emoji.classList.add('floating-element');
+            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            // Random horizontal positioning and sizing
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.fontSize = Math.random() * (30 - 18) + 18 + 'px';
+            
+            // Randomize animation speed
+            const duration = Math.random() * (7 - 4) + 4;
+            emoji.style.animationDuration = duration + 's';
+            
+            document.body.appendChild(emoji);
+
+            // Remove element after animation finishes
+            setTimeout(() => {
+                emoji.remove();
+            }, duration * 1000);
+        }
+
+        // Continually spawn background elements
+        setInterval(createFloatingEmoji, 400);
+
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const mainCard = document.getElementById('mainCard');
+        const successCard = document.getElementById('successCard');
+
+        // The classic runaway "No" button logic
+        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        function moveNoButton() {
+            // Get random coordinates within safe screen limits
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 40) + 20;
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 40) + 20;
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        // When she clicks Yes
+        yesBtn.addEventListener('click', () => {
+            mainCard.classList.add('hidden');
+            successCard.classList.remove('hidden');
+            
+            // Extra bursts of joy when she accepts
+            for(let i=0; i<30; i++) {
+                setTimeout(createFloatingEmoji, i * 50);
+            }
+        });
+    </script>
+</body>
+</html>
