@@ -1,286 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday CHOMU ✨</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Georgia', serif;
-        }
-
-        body {
-            min-height: 100vh;
-            background: linear-gradient(to bottom, #fff5f5, #ffe3e3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* ----- TOP DECORATION HEADER ----- */
-        .header-container {
-            text-align: center;
-            margin-top: 40px;
-            z-index: 10;
-        }
-
-        .birthday-title {
-            font-size: 38px;
-            color: #b76e79;
-            font-style: italic;
-            font-weight: 400;
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-        }
-
-        .name-heading {
-            font-size: 55px;
-            color: #7a303e;
-            letter-spacing: 4px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .wish-text {
-            font-size: 18px;
-            color: #555;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        /* ----- RED VELVET HEART CAKE ----- */
-        .cake-container {
-            position: absolute;
-            bottom: 18%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 5;
-        }
-
-        .heart-cake {
-            position: relative;
-            width: 240px;
-            height: 150px;
-            background: #a82c40; /* Red Velvet Core */
-            border-radius: 120px / 40px; /* Base shape perspective */
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        /* Heart effect perspective via pseudo elements */
-        .heart-cake::before, .heart-cake::after {
-            content: '';
-            position: absolute;
-            top: -20px;
-            width: 130px;
-            height: 130px;
-            background: #912234;
-            border-radius: 50%;
-        }
-        .heart-cake::before { left: 0; }
-        .heart-cake::after { right: 0; }
-
-        /* Elegant Lace/Cream Border around the cake */
-        .cream-lace {
-            position: absolute;
-            width: 100%;
-            height: 25px;
-            background: radial-gradient(circle at 50% 0%, #fffbf2 8px, transparent 9px);
-            background-size: 20px 30px;
-            top: 25px;
-            z-index: 4;
-            opacity: 0.9;
-        }
-
-        .plate {
-            width: 300px;
-            height: 40px;
-            background: #ffffff;
-            border-radius: 50%;
-            margin-top: -15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-            border: 2px solid #f0e6df;
-            z-index: 2;
-        }
-
-        /* ----- DETAILED LIT CANDLES ----- */
-        .candles-row {
-            position: absolute;
-            top: -35px;
-            display: flex;
-            justify-content: space-between;
-            width: 140px;
-            z-index: 6;
-        }
-
-        .candle {
-            width: 8px;
-            height: 50px;
-            background: linear-gradient(to right, #fffbf2, #ebdcb9);
-            border-radius: 3px;
-            position: relative;
-        }
-
-        .flame {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 10px;
-            height: 18px;
-            background: #ff9e00;
-            border-radius: 50% 50% 20% 20%;
-            box-shadow: 0 0 10px #ff9e00, 0 0 20px #ff3c00;
-            animation: flicker 0.6s infinite alternate;
-        }
-
-        @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1); opacity: 0.9; }
-            100% { transform: translateX(-52%) scale(1.1) skewX(-2deg); opacity: 1; }
-        }
-
-        /* ----- BOTTOM BALLOON LINE ----- */
-        .balloon-floor {
-            position: absolute;
-            bottom: -20px;
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            padding: 0 10px;
-            z-index: 8;
-        }
-
-        .floor-balloon {
-            width: 55px;
-            height: 68px;
-            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-            opacity: 0.95;
-            box-shadow: inset -5px -5px 12px rgba(0,0,0,0.1);
-        }
-
-        /* ----- FLOATING ELEMENTS SYSTEM ----- */
-        .dropping-ribbon {
-            position: absolute;
-            top: -50px;
-            pointer-events: none;
-            z-index: 1;
-            animation: fall linear forwards;
-        }
-
-        .floating-balloon {
-            position: absolute;
-            bottom: -90px;
-            pointer-events: none;
-            z-index: 3;
-            animation: rise up ease-in forwards;
-            opacity: 0.85;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(105vh) rotate(360deg); opacity: 0.3; }
-        }
-
-        @keyframes riseUp {
-            0% { transform: translateY(0) translateX(0); opacity: 0.9; }
-            50% { transform: translateY(-50vh) translateX(20px); opacity: 0.8; }
-            100% { transform: translateY(-110vh) translateX(-10px); opacity: 0; }
-        }
-    </style>
+        <title>Happy Birthday</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        <link rel="stylesheet" type="text/css" href="loading.css">
+        <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet' type='text/css'>
+        
+        <link rel="stylesheet/less" href="cake.less">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.1.0/less.min.js"></script>
 </head>
+
 <body>
+    <div class="loading"></div>
+        
+    <audio class="song" controls loop>
+        <source src="hbd.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
-    <div class="header-container">
-        <h1 class="birthday-title">Happy Birthday</h1>
-        <div class="name-heading">Chomu</div>
-        <div class="wish-text">Make a Wish! ✨</div>
+    <div class="balloons text-center" id="b1">
+        <img src="https://i.postimg.cc/fRVCc7YR/images-(3).jpg" alt="Balloon 1" style="width:100%; border-radius:50%;">
+    </div>
+    <div class="balloons text-center" id="b2">
+        <img src="https://i.postimg.cc/YS11Rd0S/images-(7).jpg" alt="Balloon 2" style="width:100%; border-radius:50%;">
+    </div>
+    <div class="balloons text-center" id="b3">
+        <img src="https://i.postimg.cc/Vs7XKrfY/images-(8).jpg" alt="Balloon 3" style="width:100%; border-radius:50%;">
+    </div>
+    <div class="balloons text-center" id="b4">
+        <img src="https://i.postimg.cc/FKQSY0pv/images-(9).jpg" alt="Balloon 4" style="width:100%; border-radius:50%;">
+    </div>
+    <div class="balloons text-center" id="b5">
+        <img src="https://i.postimg.cc/3NW4s18p/images-(1).png" alt="Balloon 5" style="width:100%; border-radius:50%;">
     </div>
 
-    <div class="cake-container">
-        <div class="candles-row">
-            <div class="candle"><div class="flame"></div></div>
-            <div class="candle"><div class="flame"></div></div>
-            <div class="candle"><div class="flame"></div></div>
-            <div class="candle"><div class="flame"></div></div>
-        </div>
-        <div class="heart-cake">
-            <div class="cream-lace"></div>
-        </div>
-        <div class="plate"></div>
-    </div>
+    <img src="https://i.postimg.cc/d1247qrd/images-(10).jpg" width="100%" class="balloon-border">
 
-    <div class="balloon-floor">
-        <div class="floor-balloon" style="background: #2b6777;"></div>
-        <div class="floor-balloon" style="background: #b85062;"></div>
-        <div class="floor-balloon" style="background: #e2b4bd;"></div>
-        <div class="floor-balloon" style="background: #cca43b;"></div>
-        <div class="floor-balloon" style="background: #5f7a8c;"></div>
-        <div class="floor-balloon" style="background: #a27b93;"></div>
-        <div class="floor-balloon" style="background: #395b64;"></div>
-    </div>
+    <div class="container">
+                <div class="row">
+                        <div class="col-md-2 col-xs-2 bulb-holder"><div class="bulb" id="bulb_yellow"></div></div>
+                        <div class="col-md-2 col-xs-2 bulb-holder"><div class="bulb" id="bulb_red"></div></div>
+                        <div class="col-md-2 col-xs-2 bulb-holder"><div class="bulb" id="bulb_blue"></div></div>
+                        <div class="col-md-2 col-xs-2 bulb-holder"><div class="bulb" id="bulb_green"></div></div>
+                        <div class="col-md-2 col-xs-2 bulb-holder"><div class="bulb" id="bulb_pink"></div></div>
+                        <div class="col-md-2 col-xs-2 bulb-holder"><div class="bulb" id="bulb_orange"></div></div>
+                </div>
 
-    <script>
-        // Color Palettes for Dynamic Elements
-        const elementColors = ['#2b6777', '#b85062', '#e2b4bd', '#cca43b', '#5f7a8c', '#a27b93', '#ffb5a7'];
-        const ribbonShapes = ['✨', '🎈', '🌸', '░', '垂直', '🌀'];
+                <div class="row">
+                        <div class="col-md-12 text-center">
+                                <img src="https://i.postimg.cc/15Q4cy6m/images-(11).jpg" class="bannar">
+                        </div>
+                </div>
 
-        // 1. TOP DROPPER (Ribbons and Confetti Falling down)
-        function createRibbonDrop() {
-            const ribbon = document.createElement('div');
-            ribbon.classList.add('dropping-ribbon');
-            
-            // Random styling
-            ribbon.style.left = Math.random() * 100 + 'vw';
-            ribbon.style.fontSize = Math.random() * (24 - 14) + 14 + 'px';
-            ribbon.style.color = elementColors[Math.floor(Math.random() * elementColors.length)];
-            
-            // Text or shape injection
-            ribbon.innerText = Math.random() > 0.5 ? '✨' : '🌸';
-            if(Math.random() > 0.8) ribbon.innerText = '🎀';
+                <div class="row cake-cover">
+                        <div class="col-md-12 text-center">
+                                <div class="cake">
+                                  <div class="velas">
+                                    <div class="fuego"></div>
+                                    <div class="fuego"></div>
+                                    <div class="fuego"></div>
+                                    <div class="fuego"></div>
+                                    <div class="fuego"></div>
+                                  </div>
+                                  <div class="cobertura"></div>
+                                  <div class="bizcocho"></div>
+                                </div>
+                        </div>
+                </div>
 
-            const duration = Math.random() * (7 - 4) + 4;
-            ribbon.style.animationDuration = duration + 's';
-            
-            document.body.appendChild(ribbon);
-            setTimeout(() => { ribbon.remove(); }, duration * 1000);
-        }
+                <div class="row message">
+                        <div class="col-md-12">
+                                <p>Today is...</p>
+                                <p>as beautiful as other days</p>
+                                <p>but you realize</p>
+                                <p>another year has gone</p>
+                                <p>in a blink of the eyes</p>
+                                <p><strong>however</strong></p>
+                                <p>Do you know..?</p>
+                                <p>today is just special</p>
+                                <p>so special to you</p>
+                                <p>that's why</p>
+                                <p>Let's make it...</p>
+                                <p>the best celebration ever</p>
+                                <p>and let me share...</p>
+                                <p>a piece of happiness to you</p>
+                                <p>I made all this...</p>
+                                <p>as a birthday present to you</p>
+                                <p>thanks for being there</p>
+                                <p>thanks for everything</p>
+                                <p>I wish you all the best</p>
+                                <p>May all your wishes come true</p>
+                                <p>don't worry</p>
+                                <p>because...</p>
+                                <p>this year will be better</p>
+                                <p>and I hope</p>
+                                <p>you'll find...</p>
+                                <p>happiness along the way</p>
+                                <p>keep your spirit up</p>
+                                <p>enjoy every single moment...</p>
+                                <p>fill it with your most beautiful smile</p>
+                                <p>lastly...</p>
+                                <p>I'd like to wish you one more time</p>
+                                <p>a very happy birthday Chomu! 🥰✨</p>
+                        </div>
+                </div>
 
-        // 2. BOTTOM FLOATER (Balloons rising up from the line)
-        function createRisingBalloon() {
-            const container = document.createElement('div');
-            container.classList.add('floating-balloon');
-            
-            // Balloon styling structure
-            const targetColor = elementColors[Math.floor(Math.random() * elementColors.length)];
-            container.style.left = Math.random() * 90 + 5 + 'vw';
-            
-            // Draw balloon SVG dynamically for high resolution look
-            container.innerHTML = `
-                <svg width="60" height="90" viewBox="0 0 60 90">
-                    <ellipse cx="30" cy="40" rx="25" ry="32" fill="${targetColor}" />
-                    <polygon points="30,72 26,78 34,78" fill="${targetColor}" />
-                    <path d="M30,78 Q28,84 32,90" stroke="#777" stroke-width="1.5" fill="none"/>
-                </svg>
-            `;
-
-            const duration = Math.random() * (9 - 6) + 6;
-            container.style.animationName = 'riseUp';
-            container.style.animationDuration = duration + 's';
-            container.style.animationTimingFunction = 'ease-in';
-            
-            document.body.appendChild(container);
-            setTimeout(() => { container.remove(); }, duration * 1000);
-        }
-
-        // Timers loop execution
-        setInterval(createRibbonDrop, 300);   // Smooth quick drops
-        setInterval(createRisingBalloon, 1800); // Elegant slow rising balloons
-    </script>
-</body>
-</html>
+                <div class="navbar navbar-fixed-bottom">
+                        <div class="row">
+                                <div class="col-md-6 text-center col-md-offset-3">
+                                        <button class="btn btn-primary" id="turn_on">Turn On Lights
