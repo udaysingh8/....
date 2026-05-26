@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Piduu! 🦄✨</title>
+    <title>A Special Surprise ✨</title>
     <style>
         /* Acoustic Pastel Pink Aesthetic */
         :root {
@@ -32,7 +32,103 @@
             position: relative;
         }
 
-        /* Floating Background Elements */
+        /* ----- PASSWORD GATE OVERLAY ----- */
+        #passwordOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            /* Aapka diya hua custom background image link yahan laga diya hai */
+            background-image: url('https://i.postimg.cc/0NkYDsvt/file-00000000a9f47209a4b281157b28b5df.png'); 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        /* Glassmorphism Lock Box */
+        .lock-box {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 35px 25px;
+            width: 85%;
+            max-width: 340px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .lock-box h2 {
+            color: #2b2d42;
+            font-size: 22px;
+            margin-bottom: 6px;
+            transition: color 0.3s ease;
+        }
+
+        .lock-box .hint {
+            color: #6c757d;
+            font-size: 13px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .lock-box input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            font-size: 15px;
+            outline: none;
+            text-align: center;
+            color: #333;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .lock-box input:focus {
+            border-color: #ff758f;
+            box-shadow: 0 0 10px rgba(255, 117, 143, 0.2);
+        }
+
+        .lock-box .enter-btn {
+            width: 100%;
+            padding: 14px;
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .lock-box .enter-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Fade out style when unlocked */
+        .gate-unlocked {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(1.05);
+        }
+
+        /* ----- MAIN CONTENT INITIAL STATE ----- */
+        .main-content-blur {
+            filter: blur(20px);
+            transition: filter 0.8s ease;
+        }
+
+        /* ----- FLOATING BACKGROUND ELEMENTS ----- */
         .floating-element {
             position: absolute;
             font-size: 24px;
@@ -43,19 +139,13 @@
         }
 
         @keyframes floatUp {
-            0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
             10% { opacity: 0.8; }
             90% { opacity: 0.8; }
-            100% {
-                transform: translateY(-110vh) translateX(50px) rotate(360deg);
-                opacity: 0;
-            }
+            100% { transform: translateY(-110vh) translateX(50px) rotate(360deg); opacity: 0; }
         }
 
-        /* Main Acoustic Card */
+        /* ----- BIRTHDAY CARD MAIN PANEL ----- */
         .card {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
@@ -68,10 +158,8 @@
             border: 1px solid rgba(255, 255, 255, 0.5);
             text-align: center;
             z-index: 10;
-            transition: all 0.4s ease;
         }
 
-        /* Cute Title and Emoji Headers */
         .header-emojis {
             font-size: 40px;
             margin-bottom: 10px;
@@ -92,7 +180,6 @@
             letter-spacing: -0.5px;
         }
 
-        /* Center Media/Image Box */
         .image-container {
             width: 100%;
             height: 180px;
@@ -113,25 +200,10 @@
             object-fit: cover;
         }
 
-        .image-placeholder {
-            font-size: 50px;
-        }
-
-        p {
-            color: var(--text-dark);
-            font-size: 15px;
-            font-weight: 500;
-            margin-bottom: 25px;
-        }
-
-        /* Buttons Structure */
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            position: relative;
-        }
-
+        .image-placeholder { font-size: 50px; }
+        p { color: var(--text-dark); font-size: 15px; font-weight: 500; margin-bottom: 25px; }
+        .btn-group { display: flex; flex-direction: column; gap: 12px; position: relative; }
+        
         .btn {
             width: 100%;
             padding: 14px;
@@ -144,35 +216,23 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
-        .btn-yes {
-            background: var(--btn-yes);
-            color: white;
-        }
-
-        .btn-yes:active {
-            transform: scale(0.98);
-        }
-
-        .btn-no {
-            background: var(--btn-no);
-            color: var(--text-main);
-            border: 1px solid var(--text-main);
-            position: relative;
-        }
-
-        /* Success State */
-        .hidden {
-            display: none !important;
-        }
-
-        .success-title {
-            color: var(--text-dark);
-            font-size: 26px;
-            margin-top: 15px;
-        }
+        .btn-yes { background: var(--btn-yes); color: white; }
+        .btn-yes:active { transform: scale(0.98); }
+        .btn-no { background: var(--btn-no); color: var(--text-main); border: 1px solid var(--text-main); position: relative; }
+        .hidden { display: none !important; }
+        .success-title { color: var(--text-dark); font-size: 26px; margin-top: 15px; }
     </style>
 </head>
-<body>
+<body class="main-content-blur" id="bodyWrapper">
+
+    <div id="passwordOverlay">
+        <div class="lock-box">
+            <h2 id="lockHeading">Password please</h2>
+            <div class="hint" id="lockHint">HINT: What's your name?</div>
+            <input type="text" id="passwordInput" placeholder="Type here..." autocomplete="off">
+            <button class="enter-btn" id="enterBtn">Enter</button>
+        </div>
+    </div>
 
     <div class="card" id="mainCard">
         <span class="header-emojis">🦄🧸💖</span>
@@ -198,39 +258,75 @@
     </div>
 
     <script>
-        // Array of cute emojis to float in the background
-        const emojis = ['🌸', '💖', '🦄', '🧸', '✨', '🎈', '🍭', '🍓'];
+        // Password trigger settings
+        const CORRECT_NAME = "piddu"; 
 
+        // Wrong password funny custom lines
+        const wrongAnswersList = [
+            "Oyee chomu sahi naam likho! 😤",
+            "Arey yaara! bhool gye apna naam? 🥺",
+            "Wrong password buddhu! ❌",
+            "Nooo, that's not you! 🤔",
+            "Sahi naam dalo varna gift nhi milega 🎁"
+        ];
+
+        const enterBtn = document.getElementById('enterBtn');
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordOverlay = document.getElementById('passwordOverlay');
+        const bodyWrapper = document.getElementById('bodyWrapper');
+        const lockHeading = document.getElementById('lockHeading');
+        const lockHint = document.getElementById('lockHint');
+
+        let errorCount = 0;
+
+        function checkPassword() {
+            const userInput = passwordInput.value.trim().toLowerCase();
+            
+            if (userInput === CORRECT_NAME.toLowerCase()) {
+                passwordOverlay.classList.add('gate-unlocked');
+                bodyWrapper.style.filter = 'none'; 
+                setInterval(createFloatingEmoji, 400);
+            } else {
+                // Change the main password text randomly on every wrong input!
+                const randomLine = wrongAnswersList[Math.floor(Math.random() * wrongAnswersList.length)];
+                lockHeading.innerText = randomLine;
+                lockHeading.style.color = "#d90429"; // Turns red on error
+                
+                // Add a cute changing subtitle as well
+                lockHint.innerText = "Try again clearly... 🤫";
+                lockHint.style.color = "#d90429";
+
+                // Shake animation trick for inputs
+                passwordInput.style.borderColor = '#d90429';
+                passwordInput.value = ''; // clears wrong text
+            }
+        }
+
+        enterBtn.addEventListener('click', checkPassword);
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkPassword();
+        });
+
+        // Floating system
+        const emojis = ['🌸', '💖', '🦄', '🧸', '✨', '🎈', '🍭', '🍓'];
         function createFloatingEmoji() {
             const emoji = document.createElement('div');
             emoji.classList.add('floating-element');
             emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-            
-            // Random horizontal positioning and sizing
             emoji.style.left = Math.random() * 100 + 'vw';
             emoji.style.fontSize = Math.random() * (30 - 18) + 18 + 'px';
-            
-            // Randomize animation speed
             const duration = Math.random() * (7 - 4) + 4;
             emoji.style.animationDuration = duration + 's';
-            
             document.body.appendChild(emoji);
-
-            // Remove element after animation finishes
-            setTimeout(() => {
-                emoji.remove();
-            }, duration * 1000);
+            setTimeout(() => { emoji.remove(); }, duration * 1000);
         }
 
-        // Continually spawn background elements
-        setInterval(createFloatingEmoji, 400);
-
+        // Runaway system
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
         const mainCard = document.getElementById('mainCard');
         const successCard = document.getElementById('successCard');
 
-        // The classic runaway "No" button logic
         noBtn.addEventListener('mouseover', moveNoButton);
         noBtn.addEventListener('touchstart', (e) => {
             e.preventDefault();
@@ -238,21 +334,16 @@
         });
 
         function moveNoButton() {
-            // Get random coordinates within safe screen limits
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 40) + 20;
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 40) + 20;
-            
             noBtn.style.position = 'fixed';
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
         }
 
-        // When she clicks Yes
         yesBtn.addEventListener('click', () => {
             mainCard.classList.add('hidden');
             successCard.classList.remove('hidden');
-            
-            // Extra bursts of joy when she accepts
             for(let i=0; i<30; i++) {
                 setTimeout(createFloatingEmoji, i * 50);
             }
