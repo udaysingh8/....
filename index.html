@@ -60,7 +60,7 @@
             border-radius: 24px;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            transition: all 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .lock-box h2 {
@@ -109,13 +109,12 @@
             transition: all 0.3s ease;
         }
 
-        /* Standard Enter Button */
         .enter-btn {
             background: linear-gradient(135deg, #ff4d6d, #ff758f);
             box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
         }
 
-        /* Dark Premium Slate Button (Matches your exact screenshot look) */
+        /* Dark Premium Slate Button */
         .start-btn {
             background: #3a3b5c;
             color: #ffffff;
@@ -137,109 +136,85 @@
         .hidden {
             display: none !important;
         }
-    </style>
-</head>
-<body>
 
-    <div class="bg-layer" id="bgInitial"></div>
-    <div class="bg-layer" id="bgUnlocked"></div>
-
-    <div class="lock-box" id="lockBox">
-        <h2 id="lockHeading">Password please</h2>
-        <div class="hint" id="lockHint">HINT: What's your name?</div>
+        /* ========================================================
+           NEW CELEBRATION STYLES (LOADS ON START CLICK)
+           ======================================================== */
         
-        <input type="text" id="passwordInput" placeholder="Type here..." autocomplete="off">
-        <button class="btn enter-btn" id="enterBtn">Enter</button>
-
-        <a href="celebration.html" class="btn start-btn" id="startBtn">START 🚀</a>
-    </div>
-
-    <script>
-        const CORRECT_NAME = "Chomu"; 
-        const wrongAnswersList = [
-            "Bhondu sahi naam likho! 😤",
-            "Ap apna name bhul gya betu🥺?",
-            "Wrong password kuchupuchu! ❌",
-            "Sahi naam dalo varna gift noi milega 🎁"
-        ];
-
-        const enterBtn = document.getElementById('enterBtn');
-        const passwordInput = document.getElementById('passwordInput');
-        const startBtn = document.getElementById('startBtn');
-        const lockHeading = document.getElementById('lockHeading');
-        const lockHint = document.getElementById('lockHint');
-        
-        const bgInitial = document.getElementById('bgInitial');
-        const bgUnlocked = document.getElementById('bgUnlocked');
-        const lockBox = document.getElementById('lockBox');
-
-        function checkPassword() {
-            const userInput = passwordInput.value.trim().toLowerCase();
-            
-            if (userInput === CORRECT_NAME.toLowerCase()) {
-                // 1. FIXED BACKGROUND TRANSITION (Z-Index swap fix)
-                bgInitial.style.opacity = '0'; 
-                bgUnlocked.style.opacity = '1';
-                
-                // 2. TEXT UPDATE (With your custom text)
-                lockHeading.innerText = "Yeeeeeeee chomuuuu! 🥰";
-                lockHeading.style.color = "#ff4d6d";
-                lockHint.innerText = "Congratulations babyyy jii... happppppppppy birthday mera bachuuu💋✨";
-                lockHint.style.color = "#6c757d";
-                
-                // 3. ELEMENT VISIBILITY SWAP
-                passwordInput.classList.add('hidden');
-                enterBtn.classList.add('hidden');
-                
-                // SHOW Start Button
-                startBtn.style.display = 'flex';
-                
-                // Floating Emojis Init
-                setInterval(createFloatingEmoji, 450);
-            } else {
-                const randomLine = wrongAnswersList[Math.floor(Math.random() * wrongAnswersList.length)];
-                lockHeading.innerText = randomLine;
-                lockHeading.style.color = "#d90429"; 
-                lockHint.innerText = "Try again betu... 🤫";
-                lockHint.style.color = "#d90429";
-                passwordInput.style.borderColor = '#d90429';
-                passwordInput.value = ''; 
-            }
+        .celebration-screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+            z-index: 15;
+            font-family: 'Georgia', serif;
         }
 
-        enterBtn.addEventListener('click', checkPassword);
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') checkPassword();
-        });
-
-        const emojis = ['🌸', '💖', '✨', '🎈', '🤍'];
-        function createFloatingEmoji() {
-            // FIXED syntax error here (bg_unlocked wrapper check)
-            if(bgInitial.style.opacity === '0') { 
-                const emoji = document.createElement('div');
-                emoji.style.position = 'absolute';
-                emoji.style.pointerEvents = 'none';
-                emoji.style.zIndex = '5';
-                emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-                emoji.style.left = Math.random() * 100 + 'vw';
-                emoji.style.fontSize = Math.random() * (26 - 15) + 15 + 'px';
-                emoji.style.bottom = '-50px';
-                emoji.style.animation = `floatUpAmbient ${Math.random() * (6.5 - 4) + 4}s linear forwards`;
-                
-                document.body.appendChild(emoji);
-                setTimeout(() => { emoji.remove(); }, 6500);
-            }
+        .celebration-screen.active {
+            opacity: 1;
+            pointer-events: auto;
         }
 
-        const styleNode = document.createElement('style');
-        styleNode.innerHTML = `
-            @keyframes floatUpAmbient {
-                0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-                10% { opacity: 0.75; }
-                100% { transform: translateY(-115vh) translateX(60px) rotate(360deg); opacity: 0; }
-            }
-        `;
-        document.body.appendChild(styleNode);
-    </script>
-</body>
-</html>
+        .header-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .birthday-title {
+            font-size: 38px;
+            color: #b76e79;
+            font-style: italic;
+            font-weight: 400;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .name-heading {
+            font-size: 55px;
+            color: #7a303e;
+            letter-spacing: 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .wish-text {
+            font-size: 18px;
+            color: #555;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* RED VELVET HEART CAKE */
+        .cake-container {
+            position: absolute;
+            bottom: 18%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .heart-cake {
+            position: relative;
+            width: 240px;
+            height: 150px;
+            background: #a82c40; /* Red Velvet Core */
+            border-radius: 120px / 40px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .heart-cake::before, .heart-cake::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            width: 130px;
+            height: 130px;
+            background: #912234;
+            border-radius: 50%;
+        }
