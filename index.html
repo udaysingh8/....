@@ -31,15 +31,17 @@
             background-position: center;
             transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
-            transform: scale(1.05);
+            transform: scale(1.05); /* Avoid white edges */
         }
 
+        /* 1. INITIAL: Blurred Login Texture Background */
         #bgInitial {
             background-image: url('https://i.postimg.cc/0NkYDsvt/file-00000000a9f47209a4b281157b28b5df.png');
             z-index: 2;
             opacity: 1;
         }
 
+        /* 2. SUCCESS: Unlocked Image Background */
         #bgUnlocked {
             background-image: url('https://i.postimg.cc/ncrXthkK/file-00000000be48720b82f9741b5bb4fe2e.png');
             z-index: 1;
@@ -58,7 +60,7 @@
             border-radius: 24px;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: all 0.4s ease;
         }
 
         .lock-box h2 {
@@ -105,16 +107,15 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
+        /* Standard Enter Button */
         .enter-btn {
             background: linear-gradient(135deg, #ff4d6d, #ff758f);
             box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
         }
 
+        /* Dark Premium Slate Button (Matches your exact screenshot look) */
         .start-btn {
             background: #3a3b5c;
             color: #ffffff;
@@ -123,6 +124,9 @@
             letter-spacing: 1px;
             box-shadow: 0 5px 15px rgba(58, 59, 92, 0.3);
             display: none; 
+            text-decoration: none;
+            justify-content: center;
+            align-items: center;
             text-transform: uppercase;
         }
 
@@ -132,193 +136,6 @@
 
         .hidden {
             display: none !important;
-        }
-
-        /* ----- CELEBRATION SCREEN OVERLAY ----- */
-        .celebration-screen {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0; left: 0;
-            display: none; /* Initially hard hidden to avoid structural bugs */
-            flex-direction: column;
-            align-items: center;
-            z-index: 15;
-            font-family: 'Georgia', serif;
-            opacity: 0;
-            transition: opacity 0.8s ease;
-        }
-
-        .celebration-screen.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .header-container {
-            text-align: center;
-            margin-top: 40px;
-            z-index: 20;
-        }
-
-        .birthday-title {
-            font-size: 36px;
-            color: #b76e79;
-            font-style: italic;
-            font-weight: 400;
-            margin-bottom: 5px;
-        }
-
-        .name-heading {
-            font-size: 52px;
-            color: #7a303e;
-            letter-spacing: 4px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-
-        .wish-text {
-            font-size: 18px;
-            color: #555;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        /* RED VELVET HEART CAKE */
-        .cake-container {
-            position: absolute;
-            bottom: 18%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 18;
-        }
-
-        .heart-cake {
-            position: relative;
-            width: 240px;
-            height: 140px;
-            background: #a82c40; 
-            border-radius: 120px / 40px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .heart-cake::before, .heart-cake::after {
-            content: '';
-            position: absolute;
-            top: -20px;
-            width: 130px;
-            height: 130px;
-            background: #912234;
-            border-radius: 50%;
-        }
-        .heart-cake::before { left: 0; }
-        .heart-cake::after { right: 0; }
-
-        .cream-lace {
-            position: absolute;
-            width: 100%;
-            height: 25px;
-            background: radial-gradient(circle at 50% 0%, #fffbf2 8px, transparent 9px);
-            background-size: 20px 30px;
-            top: 25px;
-            z-index: 4;
-            opacity: 0.9;
-        }
-
-        .plate {
-            width: 300px;
-            height: 40px;
-            background: #ffffff;
-            border-radius: 50%;
-            margin-top: -15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-            border: 2px solid #f0e6df;
-            z-index: 2;
-        }
-
-        /* CANDLES SYSTEM */
-        .candles-row {
-            position: absolute;
-            top: -35px;
-            display: flex;
-            justify-content: space-between;
-            width: 140px;
-            z-index: 22;
-        }
-
-        .candle {
-            width: 8px;
-            height: 50px;
-            background: linear-gradient(to right, #fffbf2, #ebdcb9);
-            border-radius: 3px;
-            position: relative;
-        }
-
-        .flame {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 10px;
-            height: 18px;
-            background: #ff9e00;
-            border-radius: 50% 50% 20% 20%;
-            box-shadow: 0 0 10px #ff9e00, 0 0 20px #ff3c00;
-            animation: flicker 0.6s infinite alternate;
-        }
-
-        @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1); opacity: 0.9; }
-            100% { transform: translateX(-52%) scale(1.1) skewX(-2deg); opacity: 1; }
-        }
-
-        /* BOTTOM BALLOON LINE */
-        .balloon-floor {
-            position: absolute;
-            bottom: -20px;
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            padding: 0 10px;
-            z-index: 19;
-        }
-
-        .floor-balloon {
-            width: 55px;
-            height: 68px;
-            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-            opacity: 0.95;
-            box-shadow: inset -5px -5px 12px rgba(0,0,0,0.1);
-        }
-
-        /* RUNTIME FLOATING/DROPPING ITEMS */
-        .dropping-ribbon {
-            position: absolute;
-            top: -50px;
-            pointer-events: none;
-            z-index: 12;
-            animation: fall linear forwards;
-        }
-
-        .floating-balloon {
-            position: absolute;
-            bottom: -90px;
-            pointer-events: none;
-            z-index: 13;
-            animation: riseUp ease-in forwards;
-            opacity: 0.85;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(105vh) rotate(360deg); opacity: 0.3; }
-        }
-
-        @keyframes riseUp {
-            0% { transform: translateY(0) translateX(0); opacity: 0.9; }
-            50% { transform: translateY(-50vh) translateX(20px); opacity: 0.8; }
-            100% { transform: translateY(-110vh) translateX(-10px); opacity: 0; }
         }
     </style>
 </head>
@@ -332,40 +149,9 @@
         <div class="hint" id="lockHint">HINT: What's your name?</div>
         
         <input type="text" id="passwordInput" placeholder="Type here..." autocomplete="off">
-        <button class="btn enter-btn" id="enterBtn" onclick="checkPassword()">Enter</button>
+        <button class="btn enter-btn" id="enterBtn">Enter</button>
 
-        <button class="btn start-btn" id="startBtn" onclick="startCelebration()">START 🚀</button>
-    </div>
-
-    <div class="celebration-screen" id="celebrationScreen">
-        <div class="header-container">
-            <h1 class="birthday-title">Happy Birthday</h1>
-            <div class="name-heading">Chomu</div>
-            <div class="wish-text">Make a Wish! ✨</div>
-        </div>
-
-        <div class="cake-container">
-            <div class="candles-row">
-                <div class="candle"><div class="flame"></div></div>
-                <div class="candle"><div class="flame"></div></div>
-                <div class="candle"><div class="flame"></div></div>
-                <div class="candle"><div class="flame"></div></div>
-            </div>
-            <div class="heart-cake">
-                <div class="cream-lace"></div>
-            </div>
-            <div class="plate"></div>
-        </div>
-
-        <div class="balloon-floor">
-            <div class="floor-balloon" style="background: #2b6777;"></div>
-            <div class="floor-balloon" style="background: #b85062;"></div>
-            <div class="floor-balloon" style="background: #e2b4bd;"></div>
-            <div class="floor-balloon" style="background: #cca43b;"></div>
-            <div class="floor-balloon" style="background: #5f7a8c;"></div>
-            <div class="floor-balloon" style="background: #a27b93;"></div>
-            <div class="floor-balloon" style="background: #395b64;"></div>
-        </div>
+        <a href="celebration.html" class="btn start-btn" id="startBtn">START 🚀</a>
     </div>
 
     <script>
@@ -386,25 +172,29 @@
         const bgInitial = document.getElementById('bgInitial');
         const bgUnlocked = document.getElementById('bgUnlocked');
         const lockBox = document.getElementById('lockBox');
-        const celebrationScreen = document.getElementById('celebrationScreen');
 
         function checkPassword() {
             const userInput = passwordInput.value.trim().toLowerCase();
             
             if (userInput === CORRECT_NAME.toLowerCase()) {
+                // 1. FIXED BACKGROUND TRANSITION (Z-Index swap fix)
                 bgInitial.style.opacity = '0'; 
                 bgUnlocked.style.opacity = '1';
                 
+                // 2. TEXT UPDATE (With your custom text)
                 lockHeading.innerText = "Yeeeeeeee chomuuuu! 🥰";
                 lockHeading.style.color = "#ff4d6d";
                 lockHint.innerText = "Congratulations babyyy jii... happppppppppy birthday mera bachuuu💋✨";
                 lockHint.style.color = "#6c757d";
                 
+                // 3. ELEMENT VISIBILITY SWAP
                 passwordInput.classList.add('hidden');
                 enterBtn.classList.add('hidden');
                 
+                // SHOW Start Button
                 startBtn.style.display = 'flex';
                 
+                // Floating Emojis Init
                 setInterval(createFloatingEmoji, 450);
             } else {
                 const randomLine = wrongAnswersList[Math.floor(Math.random() * wrongAnswersList.length)];
@@ -417,28 +207,15 @@
             }
         }
 
-        function startCelebration() {
-            // Direct structural activation triggers
-            lockBox.style.opacity = '0';
-            lockBox.style.transform = 'scale(0.9)';
-            
-            setTimeout(() => {
-                lockBox.style.setProperty('display', 'none', 'important');
-                celebrationScreen.classList.add('active');
-                
-                // Interval runs start safely after structure is visible
-                setInterval(createRibbonDrop, 300);
-                setInterval(createRisingBalloon, 1600);
-            }, 400);
-        }
-
+        enterBtn.addEventListener('click', checkPassword);
         passwordInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') checkPassword();
         });
 
         const emojis = ['🌸', '💖', '✨', '🎈', '🤍'];
         function createFloatingEmoji() {
-            if(bgInitial.style.opacity === '0' && !celebrationScreen.classList.contains('active')) { 
+            // FIXED syntax error here (bg_unlocked wrapper check)
+            if(bgInitial.style.opacity === '0') { 
                 const emoji = document.createElement('div');
                 emoji.style.position = 'absolute';
                 emoji.style.pointerEvents = 'none';
@@ -452,46 +229,6 @@
                 document.body.appendChild(emoji);
                 setTimeout(() => { emoji.remove(); }, 6500);
             }
-        }
-
-        const elementColors = ['#2b6777', '#b85062', '#e2b4bd', '#cca43b', '#5f7a8c', '#a27b93', '#ffb5a7'];
-
-        function createRibbonDrop() {
-            const ribbon = document.createElement('div');
-            ribbon.classList.add('dropping-ribbon');
-            ribbon.style.left = Math.random() * 100 + 'vw';
-            ribbon.style.fontSize = Math.random() * (24 - 14) + 14 + 'px';
-            ribbon.style.color = elementColors[Math.floor(Math.random() * elementColors.length)];
-            
-            ribbon.innerText = Math.random() > 0.5 ? '✨' : '🌸';
-            if(Math.random() > 0.8) ribbon.innerText = '🎀';
-
-            const duration = Math.random() * (7 - 4) + 4;
-            ribbon.style.animationDuration = duration + 's';
-            
-            document.body.appendChild(ribbon);
-            setTimeout(() => { ribbon.remove(); }, duration * 1000);
-        }
-
-        function createRisingBalloon() {
-            const container = document.createElement('div');
-            container.classList.add('floating-balloon');
-            const targetColor = elementColors[Math.floor(Math.random() * elementColors.length)];
-            container.style.left = Math.random() * 90 + 5 + 'vw';
-            
-            container.innerHTML = `
-                <svg width="60" height="90" viewBox="0 0 60 90">
-                    <ellipse cx="30" cy="40" rx="25" ry="32" fill="${targetColor}" />
-                    <polygon points="30,72 26,78 34,78" fill="${targetColor}" />
-                    <path d="M30,78 Q28,84 32,90" stroke="#777" stroke-width="1.5" fill="none"/>
-                </svg>
-            `;
-
-            const duration = Math.random() * (9 - 6) + 6;
-            container.style.animationDuration = duration + 's';
-            
-            document.body.appendChild(container);
-            setTimeout(() => { container.remove(); }, duration * 1000);
         }
 
         const styleNode = document.createElement('style');
