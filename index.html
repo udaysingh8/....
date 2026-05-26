@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Special Surprise ✨</title>
     <style>
-        /* Acoustic Pastel Pink Aesthetic */
+        /* Acoustic Pastel Pink & Warm Peach Aesthetic */
         :root {
             --bg-gradient: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 50%, #ffb3c6 100%);
-            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-bg: rgba(255, 255, 255, 0.95);
             --text-main: #ff4d6d;
             --text-dark: #c9184a;
             --btn-yes: #ff758f;
@@ -35,18 +35,12 @@
         /* ----- PASSWORD GATE OVERLAY ----- */
         #passwordOverlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            display: flex; justify-content: center; align-items: center;
             z-index: 100;
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s ease;
         }
 
-        /* Background blur standard setup */
         #passwordOverlay::before {
             content: "";
             position: absolute;
@@ -54,160 +48,136 @@
             background-image: url('https://i.postimg.cc/0NkYDsvt/file-00000000a9f47209a4b281157b28b5df.png'); 
             background-size: cover;
             background-position: center;
-            filter: blur(8px); /* Sirf background photo blur hogi */
+            filter: blur(8px);
             z-index: -1;
         }
 
-        /* Glassmorphism Lock Box - NO BLUR FOR TEXT */
         .lock-box {
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.94);
             border: 1px solid rgba(255, 255, 255, 0.5);
             padding: 35px 25px;
-            width: 85%;
-            max-width: 340px;
+            width: 85%; max-width: 340px;
             border-radius: 24px;
             text-align: center;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-            z-index: 102;
         }
 
-        .lock-box h2 {
-            color: #2b2d42;
-            font-size: 22px;
-            margin-bottom: 6px;
-        }
-
-        .lock-box .hint {
-            color: #6c757d;
-            font-size: 13px;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
+        .lock-box h2 { color: #2b2d42; font-size: 22px; margin-bottom: 6px; transition: all 0.3s ease; }
+        .lock-box .hint { color: #6c757d; font-size: 13px; margin-bottom: 20px; font-weight: 500; }
+        
         .lock-box input {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #ffe5ec;
-            background: #fff;
-            border-radius: 12px;
-            font-size: 15px;
-            outline: none;
-            text-align: center;
-            color: #333;
-            margin-bottom: 16px;
+            width: 100%; padding: 14px;
+            border: 2px solid #ffe5ec; background: #fff;
+            border-radius: 12px; font-size: 15px;
+            outline: none; text-align: center; color: #333;
+            margin-bottom: 16px; transition: border-color 0.3s;
         }
-
-        .lock-box input:focus {
-            border-color: #ff758f;
-        }
+        .lock-box input:focus { border-color: #ff758f; }
 
         .lock-box .enter-btn {
-            width: 100%;
-            padding: 14px;
-            background: #ff4d6d;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
+            width: 100%; padding: 14px;
+            background: #ff4d6d; color: white;
+            border: none; border-radius: 12px;
+            font-size: 16px; font-weight: 600; cursor: pointer;
             box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
         }
 
-        /* Fade out when unlocked */
-        .gate-unlocked {
-            opacity: 0;
-            pointer-events: none;
-            transform: scale(1.05);
-        }
+        .gate-unlocked { opacity: 0; pointer-events: none; transform: scale(1.05); }
 
-        /* ----- MAIN BIRTHDAY CARD ----- */
+        /* ----- MAIN CELEBRATION SCREEN ----- */
+        .celebration-container {
+            display: flex; flex-direction: column; align-items: center;
+            width: 100%; max-width: 400px; padding: 20px;
+            z-index: 10; opacity: 0; transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .celebration-container.show { opacity: 1; transform: translateY(0); }
+
+        .bunting-banner { width: 100%; max-width: 320px; margin-bottom: 10px; animation: swing 3s ease-in-out infinite alternate; }
+        @keyframes swing { 0% { transform: rotate(-2deg); } 100% { transform: rotate(2deg); } }
+
+        .birthday-name {
+            font-size: 42px; font-weight: 900; color: #ff4d6d;
+            text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(255, 117, 143, 0.3);
+            margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px;
+        }
+        .wish-text { color: var(--text-dark); font-size: 18px; font-weight: 600; margin-bottom: 25px; }
+
+        /* ----- INTERACTIVE CAKE DESIGN ----- */
+        .cake-wrapper { position: relative; margin-bottom: 30px; cursor: pointer; }
+        .cake { width: 160px; height: 110px; background: #ffb3c6; border-radius: 20px 20px 10px 10px; position: relative; box-shadow: 0 8px 0 #ff758f; }
+        .cake::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 35px; background: #fff0f3; border-radius: 20px 20px 0 0; }
+        .frosting { position: absolute; top: 25px; width: 100%; height: 20px; background: #fff0f3; border-radius: 0 0 10px 10px; display: flex; justify-content: space-around; }
+        .drip { width: 20px; height: 20px; background: #fff0f3; border-radius: 50%; margin-top: 5px; }
+
+        /* Multi-Candle Setup */
+        .candles-row { position: absolute; top: -25px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; }
+        .candle { width: 8px; height: 30px; background: linear-gradient(to bottom, #ffe5ec, #ff4d6d); position: relative; border-radius: 3px 3px 0 0; }
+        .flame {
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            width: 10px; height: 14px; background: #ffb703; border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 10px #ffb703; animation: flicker 0.6s infinite alternate;
+            transition: opacity 0.3s ease;
+        }
+        @keyframes flicker { 0% { transform: translateX(-50%) scale(0.9); } 100% { transform: translateX(-50%) scale(1.1); } }
+        .flame.blown-out { opacity: 0 !important; }
+
+        .instruction-tip { font-size: 12px; color: #6c757d; font-weight: 600; margin-top: 8px; }
+
+        /* ----- GIFT BANNER POPUP BUTTON ----- */
+        .gift-btn {
+            background: #ff4d6d; color: white; border: none;
+            padding: 15px 35px; font-size: 16px; font-weight: 700;
+            border-radius: 50px; cursor: pointer; display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4); transition: transform 0.2s;
+        }
+        .gift-btn:active { transform: scale(0.95); }
+
+        /* ----- PROPOSAL PROMPT MODAL ----- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(5px);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.5s ease;
+        }
+        .modal-overlay.open { opacity: 1; pointer-events: auto; }
+
         .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            width: 90%;
-            max-width: 360px;
-            padding: 30px 20px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            text-align: center;
-            z-index: 10;
-            filter: blur(15px); /* Hidden behind blur initially */
-            transition: filter 0.5s ease;
+            background: var(--card-bg); width: 90%; max-width: 350px;
+            padding: 30px 20px; border-radius: 24px; text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); transform: scale(0.9); transition: transform 0.5s ease;
         }
+        .modal-overlay.open .card { transform: scale(1); }
 
-        .card.reveal-card {
-            filter: blur(0px); /* Unblurs instantly when password matches */
+        .header-emojis { font-size: 40px; margin-bottom: 10px; display: block; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        
+        .image-container {
+            width: 100%; height: 180px; background: #ffe5ec;
+            border-radius: 16px; margin-bottom: 20px; overflow: hidden;
+            display: flex; justify-content: center; align-items: center; border: 2px dashed var(--btn-yes);
         }
-
-        .floating-element {
-            position: absolute;
-            font-size: 24px;
-            pointer-events: none;
-            opacity: 0.75;
-            animation: floatUp 6s linear infinite;
-            bottom: -50px;
-        }
-
+        .image-container img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .btn-group { display: flex; flex-direction: column; gap: 12px; position: relative; }
+        .btn { width: 100%; padding: 14px; border: none; border-radius: 50px; font-size: 15px; font-weight: 600; cursor: pointer; }
+        .btn-yes { background: var(--btn-yes); color: white; box-shadow: 0 4px 15px rgba(255,117,143,0.4); }
+        .btn-no { background: var(--btn-no); color: var(--text-main); border: 1px solid var(--text-main); position: relative; }
+        
+        .hidden { display: none !important; }
+        .floating-element { position: absolute; font-size: 24px; pointer-events: none; opacity: 0.75; animation: floatUp 6s linear infinite; bottom: -50px; }
         @keyframes floatUp {
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
             10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
             100% { transform: translateY(-110vh) translateX(50px) rotate(360deg); opacity: 0; }
         }
-
-        .header-emojis {
-            font-size: 40px;
-            margin-bottom: 10px;
-            display: block;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        h1 { color: var(--text-main); font-size: 24px; font-weight: 700; margin-bottom: 15px; }
-        
-        .image-container {
-            width: 100%;
-            height: 180px;
-            background: #ffe5ec;
-            border-radius: 16px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 2px dashed var(--btn-yes);
-        }
-
-        .image-container img { width: 100%; height: 100%; object-fit: cover; }
-        .image-placeholder { font-size: 50px; }
-        p { color: var(--text-dark); font-size: 15px; font-weight: 500; margin-bottom: 25px; }
-        .btn-group { display: flex; flex-direction: column; gap: 12px; position: relative; }
-        
-        .btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 50px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .btn-yes { background: var(--btn-yes); color: white; }
-        .btn-no { background: var(--btn-no); color: var(--text-main); border: 1px solid var(--text-main); position: relative; }
-        .hidden { display: none !important; }
-        .success-title { color: var(--text-dark); font-size: 26px; margin-top: 15px; }
     </style>
 </head>
 <body>
+
+    <audio id="bgMusic" loop>
+        <source src="https://assets.mixkit.co/active_storage/sfx/123/123-200.wav" type="audio/wav">
+    </audio>
 
     <div id="passwordOverlay">
         <div class="lock-box">
@@ -218,32 +188,67 @@
         </div>
     </div>
 
-    <div class="card" id="mainCard">
-        <span class="header-emojis">🦄🧸💖</span>
-        <h1 id="titleText">Happy Birthday, My Best View! 🎉</h1>
-        
-        <div class="image-container">
-            <img src="birthday.jpg" alt="💖" onerror="this.style.display='none'; document.getElementById('placeholder').classList.remove('hidden')">
-            <div id="placeholder" class="image-placeholder hidden">🎂</div>
+    <div class="celebration-container" id="celebrationScreen">
+        <svg class="bunting-banner" viewBox="0 0 300 50">
+            <polygon points="10,0 25,30 40,0" fill="#ff4d6d"/>
+            <polygon points="45,0 60,30 75,0" fill="#ff758f"/>
+            <polygon points="80,0 95,30 110,0" fill="#ffb3c6"/>
+            <polygon points="115,0 130,30 145,0" fill="#ffe5ec"/>
+            <polygon points="150,0 165,30 180,0" fill="#ff4d6d"/>
+            <polygon points="185,0 200,30 215,0" fill="#ff758f"/>
+            <polygon points="220,0 235,30 250,0" fill="#ffb3c6"/>
+            <polygon points="255,0 270,30 285,0" fill="#ffe5ec"/>
+        </svg>
+
+        <h1 class="birthday-name">CHOMU</h1>
+        <p class="wish-text">Have a wonderful day! ✨</p>
+
+        <div class="cake-wrapper" id="cakeClickZone">
+            <div class="candles-row">
+                <div class="candle"><div class="flame"></div></div>
+                <div class="candle"><div class="flame"></div></div>
+                <div class="candle"><div class="flame"></div></div>
+                <div class="candle"><div class="flame"></div></div>
+                <div class="candle"><div class="flame"></div></div>
+            </div>
+            <div class="cake">
+                <div class="frosting">
+                    <div class="drip"></div><div class="drip"></div><div class="drip"></div>
+                </div>
+            </div>
+            <center><p class="instruction-tip" id="cakeTip">Tap the cake to blow out candles! 🎂</p></center>
         </div>
 
-        <p id="subText">Will you go out on a magical birthday date with me? ✨</p>
-
-        <div class="btn-group">
-            <button class="btn btn-yes" id="yesBtn">Yes, absolutely! 🌸</button>
-            <button class="btn btn-no" id="noBtn">No 🥺</button>
-        </div>
+        <button class="gift-btn" id="giftBoxBtn">Open My Gift! 🎁</button>
     </div>
 
-    <div class="card hidden" id="successCard">
-        <span class="header-emojis" style="font-size: 60px;">🥳✨👑</span>
-        <h1 class="success-title">YAYYYYY! 🥰</h1>
-        <p style="margin-top: 15px; font-size: 16px;">Get ready for the best birthday ever! Prepared with honesty just for you. 🦄💖🎒</p>
+    <div class="modal-overlay" id="proposalModal">
+        <div class="card" id="mainCard">
+            <span class="header-emojis">🦄🧸💖</span>
+            <h1 style="color: var(--text-main); font-size: 22px; margin-bottom: 15px;">Happy Birthday, My Best View! 🎉</h1>
+            
+            <div class="image-container">
+                <img src="birthday.jpg" alt="💖" onerror="this.style.display='none'; document.getElementById('placeholder').classList.remove('hidden')">
+                <div id="placeholder" class="image-placeholder hidden" style="font-size: 50px;">🎂</div>
+            </div>
+
+            <p style="color: var(--text-dark); font-size: 15px; font-weight: 500; margin-bottom: 25px;">Will you go out on a magical birthday date with me? ✨</p>
+
+            <div class="btn-group">
+                <button class="btn btn-yes" id="yesBtn">Yes, absolutely! 🌸</button>
+                <button class="btn btn-no" id="noBtn">No 🥺</button>
+            </div>
+        </div>
+
+        <div class="card hidden" id="successCard">
+            <span class="header-emojis" style="font-size: 60px;">🥳✨👑</span>
+            <h1 style="color: var(--text-dark); font-size: 26px; margin-top: 15px;">YAYYYYY! 🥰</h1>
+            <p style="margin-top: 15px; font-size: 16px; color: var(--text-dark)">Get ready for the best birthday ever! Prepared with honesty just for you. 🦄💖🎒</p>
+        </div>
     </div>
 
     <script>
         const CORRECT_NAME = "Chomu"; 
-
         const wrongAnswersList = [
             "Bhondu sahi naam likho! 😤",
             "Ap apna name bhul gya betu🥺?",
@@ -255,17 +260,20 @@
         const enterBtn = document.getElementById('enterBtn');
         const passwordInput = document.getElementById('passwordInput');
         const passwordOverlay = document.getElementById('passwordOverlay');
-        const mainCard = document.getElementById('mainCard');
+        const celebrationScreen = document.getElementById('celebrationScreen');
         const lockHeading = document.getElementById('lockHeading');
         const lockHint = document.getElementById('lockHint');
+        const bgMusic = document.getElementById('bgMusic');
 
         function checkPassword() {
             const userInput = passwordInput.value.trim().toLowerCase();
             
             if (userInput === CORRECT_NAME.toLowerCase()) {
                 passwordOverlay.classList.add('gate-unlocked');
-                mainCard.classList.add('reveal-card'); // Unblurs the birthday card smoothly
-                setInterval(createFloatingEmoji, 400);
+                celebrationScreen.classList.add('show');
+                // Optional audio activation track
+                bgMusic.play().catch(() => console.log("Audio waiting for user interaction layer."));
+                setInterval(createFloatingEmoji, 450);
             } else {
                 const randomLine = wrongAnswersList[Math.floor(Math.random() * wrongAnswersList.length)];
                 lockHeading.innerText = randomLine;
@@ -278,34 +286,39 @@
         }
 
         enterBtn.addEventListener('click', checkPassword);
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') checkPassword();
+        passwordInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkPassword(); });
+
+        // Candle Blowing Out Logic
+        const cakeZone = document.getElementById('cakeClickZone');
+        const flames = document.querySelectorAll('.flame');
+        const cakeTip = document.getElementById('cakeTip');
+        let candlesLit = true;
+
+        cakeZone.addEventListener('click', () => {
+            if(candlesLit) {
+                flames.forEach(flame => flame.classList.add('blown-out'));
+                cakeTip.innerText = "Make a wish! Candles blown perfectly 🧁✨";
+                candlesLit = false;
+                // Add sudden blast of flower emojis
+                for(let i=0; i<15; i++) setTimeout(createFloatingEmoji, i * 40);
+            }
         });
 
-        // Floating elements
-        const emojis = ['🌸', '💖', '🦄', '🧸', '✨', '🎈', '🍭', '🍓'];
-        function createFloatingEmoji() {
-            const emoji = document.createElement('div');
-            emoji.classList.add('floating-element');
-            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-            emoji.style.left = Math.random() * 100 + 'vw';
-            emoji.style.fontSize = Math.random() * (30 - 18) + 18 + 'px';
-            const duration = Math.random() * (7 - 4) + 4;
-            emoji.style.animationDuration = duration + 's';
-            document.body.appendChild(emoji);
-            setTimeout(() => { emoji.remove(); }, duration * 1000);
-        }
-
-        // Runaway button
+        // Gift Modal Proposal Flow
+        const giftBoxBtn = document.getElementById('giftBoxBtn');
+        const proposalModal = document.getElementById('proposalModal');
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
+        const mainCard = document.getElementById('mainCard');
         const successCard = document.getElementById('successCard');
 
-        noBtn.addEventListener('mouseover', moveNoButton);
-        noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            moveNoButton();
+        giftBoxBtn.addEventListener('click', () => {
+            proposalModal.classList.add('open');
         });
+
+        // Runaway button setup
+        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveNoButton(); });
 
         function moveNoButton() {
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 40) + 20;
@@ -318,11 +331,24 @@
         yesBtn.addEventListener('click', () => {
             mainCard.classList.add('hidden');
             successCard.classList.remove('hidden');
-            successCard.classList.add('reveal-card');
-            for(let i=0; i<30; i++) {
-                setTimeout(createFloatingEmoji, i * 50);
+            for(let i=0; i<35; i++) {
+                setTimeout(createFloatingEmoji, i * 40);
             }
         });
+
+        // Background floating components
+        const emojis = ['🌸', '💖', '🦄', '🧸', '✨', '🎈', '🎂', '🍓'];
+        function createFloatingEmoji() {
+            const emoji = document.createElement('div');
+            emoji.classList.add('floating-element');
+            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.fontSize = Math.random() * (28 - 16) + 16 + 'px';
+            const duration = Math.random() * (7 - 4) + 4;
+            emoji.style.animationDuration = duration + 's';
+            document.body.appendChild(emoji);
+            setTimeout(() => { emoji.remove(); }, duration * 1000);
+        }
     </script>
 </body>
 </html>
