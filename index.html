@@ -19,6 +19,7 @@
             align-items: center;
             overflow: hidden;
             position: relative;
+            background-color: #ffe5ec;
         }
 
         /* ----- BACKGROUND LAYER SYSTEM ----- */
@@ -28,7 +29,7 @@
             width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
-            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
             transform: scale(1.05); /* Avoid white edges */
         }
@@ -40,49 +41,34 @@
             opacity: 1;
         }
 
-        /* 2. SUCCESS: Unlocked Romantic Photo Background (Blurred Canvas) */
+        /* 2. SUCCESS: Unlocked Image Background */
         #bgUnlocked {
             background-image: url('https://i.postimg.cc/ncrXthkK/file-00000000be48720b82f9741b5bb4fe2e.png');
             z-index: 1;
-            opacity: 0; /* Initially Hidden */
-            filter: blur(8px); /* Kept blurred initially for focus on button */
-            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), filter 1.5s ease;
-        }
-
-        /* Unblur logic when unlocked */
-        #bgUnlocked.loaded {
-            opacity: 1;
-            filter: blur(0px); /* Transition to sharp personalized photo */
+            opacity: 0;
         }
 
         /* ----- GLASSMORPHIC LOGIN BOX ----- */
         .lock-box {
             position: relative;
             z-index: 10;
-            background: rgba(255, 255, 255, 0.94);
+            background: rgba(255, 255, 255, 0.95);
             border: 1px solid rgba(255, 255, 255, 0.6);
-            padding: 40px 30px;
+            padding: 35px 25px;
             width: 85%;
             max-width: 340px;
-            border-radius: 28px;
+            border-radius: 24px;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             transition: all 0.4s ease;
         }
 
-        /* Unlocked box state (becomes more transparent) */
-        .lock-box.unlocked {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
-        }
-
         .lock-box h2 {
             color: #2b2d42;
-            font-size: 22px;
+            font-size: 21px;
             margin-bottom: 8px;
             font-weight: 700;
+            line-height: 1.3;
         }
 
         .lock-box .hint {
@@ -90,6 +76,7 @@
             font-size: 13px;
             margin-bottom: 22px;
             font-weight: 500;
+            line-height: 1.4;
         }
         
         .lock-box input {
@@ -116,7 +103,7 @@
             color: white;
             border: none;
             border-radius: 14px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -128,20 +115,19 @@
             box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
         }
 
-        /* Crystal Clear Premium Start Button */
+        /* Dark Premium Slate Button (Matches your exact screenshot look) */
         .start-btn {
-            background: rgba(255, 255, 255, 1);
-            color: #ff4d6d;
-            font-weight: 800;
-            font-size: 17px;
+            background: #3a3b5c;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 14px;
             letter-spacing: 1px;
-            box-shadow: 0 8px 30px rgba(255, 77, 109, 0.5);
-            display: none; /* Initially Hidden */
+            box-shadow: 0 5px 15px rgba(58, 59, 92, 0.3);
+            display: none; 
             text-decoration: none;
             justify-content: center;
             align-items: center;
-            transition: transform 0.2s;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
         }
 
         .start-btn:active {
@@ -183,7 +169,6 @@
         const lockHeading = document.getElementById('lockHeading');
         const lockHint = document.getElementById('lockHint');
         
-        // Background Layers Setup
         const bgInitial = document.getElementById('bgInitial');
         const bgUnlocked = document.getElementById('bgUnlocked');
         const lockBox = document.getElementById('lockBox');
@@ -192,31 +177,26 @@
             const userInput = passwordInput.value.trim().toLowerCase();
             
             if (userInput === CORRECT_NAME.toLowerCase()) {
-                // 1. DYNAMIC BACKGROUND TRANSITION
-                bgInitial.style.opacity = '0'; // Smoothly fade out textured bg
-                bgUnlocked.classList.add('loaded'); // Smoothly unblur specialized photo bg
+                // 1. FIXED BACKGROUND TRANSITION (Z-Index swap fix)
+                bgInitial.style.opacity = '0'; 
+                bgUnlocked.style.opacity = '1';
                 
-                // 2. BOX GLASSMORPHISM UPDATE
-                lockBox.classList.add('unlocked');
-                
-                // 3. TEXT UPDATE
+                // 2. TEXT UPDATE (With your custom text)
                 lockHeading.innerText = "Yeeeeeeee chomuuuu! 🥰";
                 lockHeading.style.color = "#ff4d6d";
                 lockHint.innerText = "Congratulations babyyy jii... happppppppppy birthday mera bachuuu💋✨";
                 lockHint.style.color = "#6c757d";
                 
-                // 4. ELEMENT VISIBILITY SWAP
+                // 3. ELEMENT VISIBILITY SWAP
                 passwordInput.classList.add('hidden');
                 enterBtn.classList.add('hidden');
                 
                 // SHOW Start Button
                 startBtn.style.display = 'flex';
                 
-                // Bonus Flower Pop on success!
+                // Floating Emojis Init
                 setInterval(createFloatingEmoji, 450);
-
             } else {
-                // Wrong password triggers
                 const randomLine = wrongAnswersList[Math.floor(Math.random() * wrongAnswersList.length)];
                 lockHeading.innerText = randomLine;
                 lockHeading.style.color = "#d90429"; 
@@ -232,10 +212,10 @@
             if (e.key === 'Enter') checkPassword();
         });
 
-        // Simple floating function on success (matches the feel of special photo background)
         const emojis = ['🌸', '💖', '✨', '🎈', '🤍'];
         function createFloatingEmoji() {
-            if(bg unlocked.classList.contains('loaded')) { // only after login
+            // FIXED syntax error here (bg_unlocked wrapper check)
+            if(bgInitial.style.opacity === '0') { 
                 const emoji = document.createElement('div');
                 emoji.style.position = 'absolute';
                 emoji.style.pointerEvents = 'none';
@@ -243,19 +223,14 @@
                 emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
                 emoji.style.left = Math.random() * 100 + 'vw';
                 emoji.style.fontSize = Math.random() * (26 - 15) + 15 + 'px';
-                
-                const duration = Math.random() * (6.5 - 4) + 4;
                 emoji.style.bottom = '-50px';
-                
-                // Custom CSS animation inject variant safely
-                emoji.style.animation = `floatUpAmbient ${duration}s linear forwards`;
+                emoji.style.animation = `floatUpAmbient ${Math.random() * (6.5 - 4) + 4}s linear forwards`;
                 
                 document.body.appendChild(emoji);
-                setTimeout(() => { emoji.remove(); }, duration * 1000);
+                setTimeout(() => { emoji.remove(); }, 6500);
             }
         }
 
-        // Ambient Sparkles CSS defined dynamically
         const styleNode = document.createElement('style');
         styleNode.innerHTML = `
             @keyframes floatUpAmbient {
