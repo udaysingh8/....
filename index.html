@@ -8,7 +8,7 @@
         /* Acoustic Pastel Pink Aesthetic */
         :root {
             --bg-gradient: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 50%, #ffb3c6 100%);
-            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-bg: rgba(255, 255, 255, 0.9);
             --text-main: #ff4d6d;
             --text-dark: #c9184a;
             --btn-yes: #ff758f;
@@ -39,10 +39,6 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            /* Aapka diya hua custom background image link yahan laga diya hai */
-            background-image: url('https://i.postimg.cc/0NkYDsvt/file-00000000a9f47209a4b281157b28b5df.png'); 
-            background-size: cover;
-            background-position: center;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -50,25 +46,35 @@
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        /* Glassmorphism Lock Box */
+        /* Background blur standard setup */
+        #passwordOverlay::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://i.postimg.cc/0NkYDsvt/file-00000000a9f47209a4b281157b28b5df.png'); 
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px); /* Sirf background photo blur hogi */
+            z-index: -1;
+        }
+
+        /* Glassmorphism Lock Box - NO BLUR FOR TEXT */
         .lock-box {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             padding: 35px 25px;
             width: 85%;
             max-width: 340px;
             border-radius: 24px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            z-index: 102;
         }
 
         .lock-box h2 {
             color: #2b2d42;
             font-size: 22px;
             margin-bottom: 6px;
-            transition: color 0.3s ease;
         }
 
         .lock-box .hint {
@@ -81,20 +87,18 @@
         .lock-box input {
             width: 100%;
             padding: 14px;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #ffe5ec;
+            background: #fff;
             border-radius: 12px;
             font-size: 15px;
             outline: none;
             text-align: center;
             color: #333;
             margin-bottom: 16px;
-            transition: all 0.3s ease;
         }
 
         .lock-box input:focus {
             border-color: #ff758f;
-            box-shadow: 0 0 10px rgba(255, 117, 143, 0.2);
         }
 
         .lock-box .enter-btn {
@@ -108,27 +112,36 @@
             font-weight: 600;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
-            transition: all 0.2s ease;
         }
 
-        .lock-box .enter-btn:active {
-            transform: scale(0.98);
-        }
-
-        /* Fade out style when unlocked */
+        /* Fade out when unlocked */
         .gate-unlocked {
             opacity: 0;
             pointer-events: none;
             transform: scale(1.05);
         }
 
-        /* ----- MAIN CONTENT INITIAL STATE ----- */
-        .main-content-blur {
-            filter: blur(20px);
-            transition: filter 0.8s ease;
+        /* ----- MAIN BIRTHDAY CARD ----- */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            width: 90%;
+            max-width: 360px;
+            padding: 30px 20px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            text-align: center;
+            z-index: 10;
+            filter: blur(15px); /* Hidden behind blur initially */
+            transition: filter 0.5s ease;
         }
 
-        /* ----- FLOATING BACKGROUND ELEMENTS ----- */
+        .card.reveal-card {
+            filter: blur(0px); /* Unblurs instantly when password matches */
+        }
+
         .floating-element {
             position: absolute;
             font-size: 24px;
@@ -145,21 +158,6 @@
             100% { transform: translateY(-110vh) translateX(50px) rotate(360deg); opacity: 0; }
         }
 
-        /* ----- BIRTHDAY CARD MAIN PANEL ----- */
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            width: 90%;
-            max-width: 360px;
-            padding: 30px 20px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            text-align: center;
-            z-index: 10;
-        }
-
         .header-emojis {
             font-size: 40px;
             margin-bottom: 10px;
@@ -172,14 +170,8 @@
             50% { transform: translateY(-8px); }
         }
 
-        h1 {
-            color: var(--text-main);
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            letter-spacing: -0.5px;
-        }
-
+        h1 { color: var(--text-main); font-size: 24px; font-weight: 700; margin-bottom: 15px; }
+        
         .image-container {
             width: 100%;
             height: 180px;
@@ -191,15 +183,9 @@
             justify-content: center;
             align-items: center;
             border: 2px dashed var(--btn-yes);
-            position: relative;
         }
 
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
+        .image-container img { width: 100%; height: 100%; object-fit: cover; }
         .image-placeholder { font-size: 50px; }
         p { color: var(--text-dark); font-size: 15px; font-weight: 500; margin-bottom: 25px; }
         .btn-group { display: flex; flex-direction: column; gap: 12px; position: relative; }
@@ -212,18 +198,16 @@
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
         .btn-yes { background: var(--btn-yes); color: white; }
-        .btn-yes:active { transform: scale(0.98); }
         .btn-no { background: var(--btn-no); color: var(--text-main); border: 1px solid var(--text-main); position: relative; }
         .hidden { display: none !important; }
         .success-title { color: var(--text-dark); font-size: 26px; margin-top: 15px; }
     </style>
 </head>
-<body class="main-content-blur" id="bodyWrapper">
+<body>
 
     <div id="passwordOverlay">
         <div class="lock-box">
@@ -258,10 +242,8 @@
     </div>
 
     <script>
-        // Password trigger settings
         const CORRECT_NAME = "piddu"; 
 
-        // Wrong password funny custom lines
         const wrongAnswersList = [
             "Oyee chomu sahi naam likho! 😤",
             "Arey yaara! bhool gye apna naam? 🥺",
@@ -273,32 +255,25 @@
         const enterBtn = document.getElementById('enterBtn');
         const passwordInput = document.getElementById('passwordInput');
         const passwordOverlay = document.getElementById('passwordOverlay');
-        const bodyWrapper = document.getElementById('bodyWrapper');
+        const mainCard = document.getElementById('mainCard');
         const lockHeading = document.getElementById('lockHeading');
         const lockHint = document.getElementById('lockHint');
-
-        let errorCount = 0;
 
         function checkPassword() {
             const userInput = passwordInput.value.trim().toLowerCase();
             
             if (userInput === CORRECT_NAME.toLowerCase()) {
                 passwordOverlay.classList.add('gate-unlocked');
-                bodyWrapper.style.filter = 'none'; 
+                mainCard.classList.add('reveal-card'); // Unblurs the birthday card smoothly
                 setInterval(createFloatingEmoji, 400);
             } else {
-                // Change the main password text randomly on every wrong input!
                 const randomLine = wrongAnswersList[Math.floor(Math.random() * wrongAnswersList.length)];
                 lockHeading.innerText = randomLine;
-                lockHeading.style.color = "#d90429"; // Turns red on error
-                
-                // Add a cute changing subtitle as well
+                lockHeading.style.color = "#d90429"; 
                 lockHint.innerText = "Try again clearly... 🤫";
                 lockHint.style.color = "#d90429";
-
-                // Shake animation trick for inputs
                 passwordInput.style.borderColor = '#d90429';
-                passwordInput.value = ''; // clears wrong text
+                passwordInput.value = ''; 
             }
         }
 
@@ -307,7 +282,7 @@
             if (e.key === 'Enter') checkPassword();
         });
 
-        // Floating system
+        // Floating elements
         const emojis = ['🌸', '💖', '🦄', '🧸', '✨', '🎈', '🍭', '🍓'];
         function createFloatingEmoji() {
             const emoji = document.createElement('div');
@@ -321,10 +296,9 @@
             setTimeout(() => { emoji.remove(); }, duration * 1000);
         }
 
-        // Runaway system
+        // Runaway button
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
-        const mainCard = document.getElementById('mainCard');
         const successCard = document.getElementById('successCard');
 
         noBtn.addEventListener('mouseover', moveNoButton);
@@ -344,6 +318,7 @@
         yesBtn.addEventListener('click', () => {
             mainCard.classList.add('hidden');
             successCard.classList.remove('hidden');
+            successCard.classList.add('reveal-card');
             for(let i=0; i<30; i++) {
                 setTimeout(createFloatingEmoji, i * 50);
             }
