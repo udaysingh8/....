@@ -1,10 +1,7 @@
-/* ==========================================
-   ABSOLUTE CENTER BIRTHDAY SPINNER
-   ========================================== */
 .loading {
   position: fixed;
-  z-index: 9999999; /* Sabse upar rahega */
-  background-color: #ffe5ec; /* Cute Birthday Pink Background */
+  z-index: 9999999;
+  background-color: #ffe5ec;
   top: 0;
   left: 0;
   bottom: 0;
@@ -16,7 +13,6 @@
   transition: opacity 0.5s ease-out;
 }
 
-/* Transparent Overlay for Smooth Backing */
 .loading:before {
   content: 'Loading Something Beautiful... ✨';
   display: block;
@@ -31,7 +27,6 @@
   color: #ff4d6d;
 }
 
-/* Spinner Dots Placement and Animation Trigger */
 .loading:not(:required):after {
   content: '';
   display: block;
@@ -45,8 +40,6 @@
   margin-left: -0.5em;
   animation: birthday_spinner 1500ms infinite linear;
   border-radius: 0.5em;
-  
-  /* Cute pink, dark pink, aur white dots ka combination shadow */
   box-shadow: #ff4d6d 1.5em 0 0 0, 
               rgba(255, 77, 109, 0.75) 1.1em 1.1em 0 0, 
               rgba(255, 77, 109, 0.5) 0 1.5em 0 0, 
@@ -57,14 +50,7 @@
               #ff758f 1.1em -1.1em 0 0;
 }
 
-/* ==========================================
-   ANIMATION LOGIC (STANDARD INTERNET ROTATE)
-   ========================================== */
 @keyframes birthday_spinner {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
