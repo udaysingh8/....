@@ -31,17 +31,15 @@
             background-position: center;
             transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
-            transform: scale(1.05); /* Avoid white edges */
+            transform: scale(1.05);
         }
 
-        /* 1. INITIAL: Blurred Login Texture Background */
         #bgInitial {
             background-image: url('https://i.postimg.cc/0NkYDsvt/file-00000000a9f47209a4b281157b28b5df.png');
             z-index: 2;
             opacity: 1;
         }
 
-        /* 2. SUCCESS: Unlocked Image Background */
         #bgUnlocked {
             background-image: url('https://i.postimg.cc/ncrXthkK/file-00000000be48720b82f9741b5bb4fe2e.png');
             z-index: 1;
@@ -107,27 +105,27 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Standard Enter Button */
         .enter-btn {
             background: linear-gradient(135deg, #ff4d6d, #ff758f);
             box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
         }
 
-        /* Dark Premium Slate Button (Matches your exact screenshot look) */
+        /* Dark Premium Slate Button Linked to cake.html */
         .start-btn {
             background: #3a3b5c;
-            color: #ffffff;
+            color: #ffffff !important;
             font-weight: 700;
             font-size: 14px;
             letter-spacing: 1px;
             box-shadow: 0 5px 15px rgba(58, 59, 92, 0.3);
-            display: none; 
-            text-decoration: none;
-            justify-content: center;
-            align-items: center;
+            text-decoration: none !important;
             text-transform: uppercase;
+            display: none; 
         }
 
         .start-btn:active {
@@ -151,7 +149,7 @@
         <input type="text" id="passwordInput" placeholder="Type here..." autocomplete="off">
         <button class="btn enter-btn" id="enterBtn">Enter</button>
 
-        <a href="celebration.html" class="btn start-btn" id="startBtn">START 🚀</a>
+        <a href="cake.html" class="btn start-btn" id="startBtn">START 🚀</a>
     </div>
 
     <script>
@@ -177,24 +175,24 @@
             const userInput = passwordInput.value.trim().toLowerCase();
             
             if (userInput === CORRECT_NAME.toLowerCase()) {
-                // 1. FIXED BACKGROUND TRANSITION (Z-Index swap fix)
+                // Background opacity toggle
                 bgInitial.style.opacity = '0'; 
                 bgUnlocked.style.opacity = '1';
                 
-                // 2. TEXT UPDATE (With your custom text)
+                // Text feedback updates
                 lockHeading.innerText = "Yeeeeeeee chomuuuu! 🥰";
                 lockHeading.style.color = "#ff4d6d";
                 lockHint.innerText = "Congratulations babyyy jii... happppppppppy birthday mera bachuuu💋✨";
                 lockHint.style.color = "#6c757d";
                 
-                // 3. ELEMENT VISIBILITY SWAP
+                // Hiding inputs
                 passwordInput.classList.add('hidden');
                 enterBtn.classList.add('hidden');
                 
-                // SHOW Start Button
+                // Smooth layout flex trigger for the dynamic anchor tag
                 startBtn.style.display = 'flex';
                 
-                // Floating Emojis Init
+                // Ambient particle effects
                 setInterval(createFloatingEmoji, 450);
             } else {
                 const randomLine = wrongAnswersList[Math.floor(Math.random() * wrongAnswersList.length)];
@@ -214,7 +212,6 @@
 
         const emojis = ['🌸', '💖', '✨', '🎈', '🤍'];
         function createFloatingEmoji() {
-            // FIXED syntax error here (bg_unlocked wrapper check)
             if(bgInitial.style.opacity === '0') { 
                 const emoji = document.createElement('div');
                 emoji.style.position = 'absolute';
