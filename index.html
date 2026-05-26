@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Special Surprise ✨</title>
     <style>
-        /* Acoustic Pastel Pink & Warm Peach Aesthetic */
+        /* Premium Acoustic Luxury Pastel Aesthetic */
         :root {
-            --bg-gradient: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 50%, #ffb3c6 100%);
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --text-main: #ff4d6d;
-            --text-dark: #c9184a;
-            --btn-yes: #ff758f;
-            --btn-no: #fff0f3;
+            --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #ffdee9 40%, #b5fffc 100%);
+            --premium-pink: #ff4d6d;
+            --rose-gold: #c9184a;
+            --gold-glow: #ffb703;
+            --btn-shadow: rgba(255, 77, 109, 0.35);
         }
 
         * {
@@ -30,6 +29,18 @@
             align-items: center;
             overflow: hidden;
             position: relative;
+        }
+
+        /* Ambient Acoustic Sparkles Background Layer */
+        .ambient-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 1;
+            background: radial-gradient(circle at 20% 30%, rgba(255, 229, 236, 0.6) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(181, 255, 252, 0.4) 0%, transparent 50%);
         }
 
         /* ----- PASSWORD GATE OVERLAY ----- */
@@ -53,127 +64,201 @@
         }
 
         .lock-box {
-            background: rgba(255, 255, 255, 0.94);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            padding: 35px 25px;
-            width: 85%; max-width: 340px;
-            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            padding: 40px 30px;
+            width: 85%; max-width: 350px;
+            border-radius: 30px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
         }
 
-        .lock-box h2 { color: #2b2d42; font-size: 22px; margin-bottom: 6px; transition: all 0.3s ease; }
-        .lock-box .hint { color: #6c757d; font-size: 13px; margin-bottom: 20px; font-weight: 500; }
+        .lock-box h2 { color: #2b2d42; font-size: 24px; margin-bottom: 8px; font-weight: 700; }
+        .lock-box .hint { color: #6c757d; font-size: 13px; margin-bottom: 24px; font-weight: 500; }
         
         .lock-box input {
-            width: 100%; padding: 14px;
+            width: 100%; padding: 15px;
             border: 2px solid #ffe5ec; background: #fff;
-            border-radius: 12px; font-size: 15px;
+            border-radius: 16px; font-size: 16px;
             outline: none; text-align: center; color: #333;
-            margin-bottom: 16px; transition: border-color 0.3s;
+            margin-bottom: 20px; transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
-        .lock-box input:focus { border-color: #ff758f; }
+        .lock-box input:focus { border-color: var(--premium-pink); box-shadow: 0 0 10px rgba(255, 77, 109, 0.2); }
 
         .lock-box .enter-btn {
-            width: 100%; padding: 14px;
-            background: #ff4d6d; color: white;
-            border: none; border-radius: 12px;
+            width: 100%; padding: 15px;
+            background: linear-gradient(135deg, #ff4d6d, #ff758f); color: white;
+            border: none; border-radius: 16px;
             font-size: 16px; font-weight: 600; cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+            box-shadow: 0 6px 20px var(--btn-shadow);
+            transition: transform 0.2s;
         }
+        .lock-box .enter-btn:active { transform: scale(0.98); }
 
         .gate-unlocked { opacity: 0; pointer-events: none; transform: scale(1.05); }
 
-        /* ----- MAIN CELEBRATION SCREEN ----- */
+        /* ----- PREMIUM CELEBRATION MAIN SCREEN ----- */
         .celebration-container {
             display: flex; flex-direction: column; align-items: center;
-            width: 100%; max-width: 400px; padding: 20px;
-            z-index: 10; opacity: 0; transform: translateY(20px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%; max-width: 420px; padding: 30px 20px;
+            z-index: 10; opacity: 0; transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .celebration-container.show { opacity: 1; transform: translateY(0); }
 
-        .bunting-banner { width: 100%; max-width: 320px; margin-bottom: 10px; animation: swing 3s ease-in-out infinite alternate; }
-        @keyframes swing { 0% { transform: rotate(-2deg); } 100% { transform: rotate(2deg); } }
+        /* Premium Acoustic Decoration String */
+        .acoustic-bunting {
+            width: 110%;
+            max-width: 360px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.05));
+            animation: gentleSwing 4s ease-in-out infinite alternate;
+        }
+        @keyframes gentleSwing { 0% { transform: rotate(-1.5deg); } 100% { transform: rotate(1.5deg); } }
 
+        /* Elegant Luxury Calligraphy Text */
+        .birthday-title-wrap {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: floatText 3s ease-in-out infinite alternate;
+        }
+        .bday-prefix {
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--rose-gold);
+            opacity: 0.9;
+            margin-bottom: 5px;
+            display: block;
+        }
         .birthday-name {
-            font-size: 42px; font-weight: 900; color: #ff4d6d;
-            text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(255, 117, 143, 0.3);
-            margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px;
+            font-size: 46px; font-weight: 900; 
+            background: linear-gradient(45deg, #ff4d6d, #ff758f, #ffb3c6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 3px 3px 15px rgba(255, 77, 109, 0.2);
+            letter-spacing: 1px;
         }
-        .wish-text { color: var(--text-dark); font-size: 18px; font-weight: 600; margin-bottom: 25px; }
+        @keyframes floatText { 0% { transform: translateY(0); } 100% { transform: translateY(-6px); } }
 
-        /* ----- INTERACTIVE CAKE DESIGN ----- */
-        .cake-wrapper { position: relative; margin-bottom: 30px; cursor: pointer; }
-        .cake { width: 160px; height: 110px; background: #ffb3c6; border-radius: 20px 20px 10px 10px; position: relative; box-shadow: 0 8px 0 #ff758f; }
-        .cake::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 35px; background: #fff0f3; border-radius: 20px 20px 0 0; }
-        .frosting { position: absolute; top: 25px; width: 100%; height: 20px; background: #fff0f3; border-radius: 0 0 10px 10px; display: flex; justify-content: space-around; }
-        .drip { width: 20px; height: 20px; background: #fff0f3; border-radius: 50%; margin-top: 5px; }
+        /* ----- INTERACTIVE PREMIUM CAKE ----- */
+        .cake-wrapper { position: relative; margin-bottom: 40px; cursor: pointer; transition: transform 0.3s; }
+        .cake-wrapper:hover { transform: scale(1.03); }
+        
+        .cake { 
+            width: 190px; height: 125px; 
+            background: linear-gradient(180deg, #ffb3c6 0%, #ff758f 100%); 
+            border-radius: 24px 24px 12px 12px; 
+            position: relative; 
+            box-shadow: 0 12px 25px rgba(255, 117, 143, 0.3), inset 0 -8px 0 rgba(0,0,0,0.05); 
+        }
+        .cake::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 40px; background: #fff0f3; border-radius: 24px 24px 0 0; }
+        
+        /* Cream Drips */
+        .frosting { position: absolute; top: 30px; width: 100%; height: 20px; background: #fff0f3; border-radius: 0 0 12px 12px; display: flex; justify-content: space-around; }
+        .drip { width: 24px; height: 22px; background: #fff0f3; border-radius: 50%; margin-top: 4px; }
 
-        /* Multi-Candle Setup */
-        .candles-row { position: absolute; top: -25px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; }
-        .candle { width: 8px; height: 30px; background: linear-gradient(to bottom, #ffe5ec, #ff4d6d); position: relative; border-radius: 3px 3px 0 0; }
+        /* Candles & Real Flame Sparkles */
+        .candles-row { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); display: flex; gap: 14px; }
+        .candle { width: 9px; height: 35px; background: linear-gradient(to bottom, #fff, #ff4d6d); position: relative; border-radius: 4px 4px 0 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .flame {
-            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-            width: 10px; height: 14px; background: #ffb703; border-radius: 50% 50% 20% 20%;
-            box-shadow: 0 0 10px #ffb703; animation: flicker 0.6s infinite alternate;
-            transition: opacity 0.3s ease;
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            width: 11px; height: 16px; background: radial-gradient(circle, #fff 20%, #ffb703 60%, #ff4d6d 100%); 
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 15px #ffb703, 0 0 25px #ff4d6d; 
+            animation: flicker 0.5s infinite alternate;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        @keyframes flicker { 0% { transform: translateX(-50%) scale(0.9); } 100% { transform: translateX(-50%) scale(1.1); } }
-        .flame.blown-out { opacity: 0 !important; }
+        @keyframes flicker { 0% { transform: translateX(-50%) scale(0.9) rotate(-2deg); } 100% { transform: translateX(-50%) scale(1.1) rotate(2deg); } }
+        .flame.blown-out { opacity: 0 !important; transform: translateX(-50%) scale(0); }
 
-        .instruction-tip { font-size: 12px; color: #6c757d; font-weight: 600; margin-top: 8px; }
+        .instruction-tip { font-size: 13px; color: #7d8597; font-weight: 600; margin-top: 15px; letter-spacing: 0.5px; }
 
-        /* ----- GIFT BANNER POPUP BUTTON ----- */
+        /* ----- PREMIUM LUXURY GIFT BUTTON ----- */
         .gift-btn {
-            background: #ff4d6d; color: white; border: none;
-            padding: 15px 35px; font-size: 16px; font-weight: 700;
-            border-radius: 50px; cursor: pointer; display: flex; align-items: center; gap: 10px;
-            box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4); transition: transform 0.2s;
+            background: linear-gradient(135deg, #ff4d6d 0%, #c9184a 100%); color: white; border: none;
+            padding: 16px 45px; font-size: 16px; font-weight: 700; letter-spacing: 1px;
+            border-radius: 50px; cursor: pointer; display: flex; align-items: center; gap: 12px;
+            box-shadow: 0 10px 25px rgba(201, 24, 74, 0.35); transition: all 0.3s ease;
         }
-        .gift-btn:active { transform: scale(0.95); }
+        .gift-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(201, 24, 74, 0.45); }
+        .gift-btn:active { transform: translateY(1px); }
 
-        /* ----- PROPOSAL PROMPT MODAL ----- */
+        /* ----- POPUP BANNER PROPOSAL MODAL ----- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(5px);
+            background: rgba(43, 45, 66, 0.35); backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             display: flex; justify-content: center; align-items: center;
-            z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.5s ease;
+            z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.6s ease;
         }
         .modal-overlay.open { opacity: 1; pointer-events: auto; }
 
         .card {
-            background: var(--card-bg); width: 90%; max-width: 350px;
-            padding: 30px 20px; border-radius: 24px; text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); transform: scale(0.9); transition: transform 0.5s ease;
+            background: rgba(255, 255, 255, 0.97); width: 90%; max-width: 360px;
+            padding: 35px 25px; border-radius: 32px; text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15); transform: scale(0.85); transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(255,255,255,0.7);
         }
         .modal-overlay.open .card { transform: scale(1); }
 
-        .header-emojis { font-size: 40px; margin-bottom: 10px; display: block; animation: bounce 2s infinite; }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .header-emojis { font-size: 45px; margin-bottom: 12px; display: block; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         
         .image-container {
-            width: 100%; height: 180px; background: #ffe5ec;
-            border-radius: 16px; margin-bottom: 20px; overflow: hidden;
-            display: flex; justify-content: center; align-items: center; border: 2px dashed var(--btn-yes);
+            width: 100%; height: 190px; background: #fff0f3;
+            border-radius: 20px; margin-bottom: 22px; overflow: hidden;
+            display: flex; justify-content: center; align-items: center; border: 2px dashed #ff758f;
         }
         .image-container img { width: 100%; height: 100%; object-fit: cover; }
         
-        .btn-group { display: flex; flex-direction: column; gap: 12px; position: relative; }
-        .btn { width: 100%; padding: 14px; border: none; border-radius: 50px; font-size: 15px; font-weight: 600; cursor: pointer; }
-        .btn-yes { background: var(--btn-yes); color: white; box-shadow: 0 4px 15px rgba(255,117,143,0.4); }
-        .btn-no { background: var(--btn-no); color: var(--text-main); border: 1px solid var(--text-main); position: relative; }
+        .btn-group { display: flex; flex-direction: column; gap: 14px; position: relative; }
+        .btn { width: 100%; padding: 15px; border: none; border-radius: 50px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .btn-yes { background: linear-gradient(135deg, #ff758f, #ff4d6d); color: white; box-shadow: 0 6px 18px rgba(255,77,109,0.4); }
+        .btn-yes:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(255,77,109,0.5); }
+        .btn-no { background: #fff0f3; color: var(--premium-pink); border: 1px solid #ffb3c6; position: relative; }
         
         .hidden { display: none !important; }
-        .floating-element { position: absolute; font-size: 24px; pointer-events: none; opacity: 0.75; animation: floatUp 6s linear infinite; bottom: -50px; }
-        @keyframes floatUp {
+
+        /* ----- PREMIUM BALLOON & SPARKLE ANIMATIONS ----- */
+        .balloon {
+            position: absolute; width: 50px; height: 65px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            pointer-events: none; opacity: 0.9; z-index: 5;
+            animation: flyUp 6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+            bottom: -100px;
+        }
+        .balloon::after {
+            content: ""; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
+            width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent;
+        }
+        /* Custom String for Balloons */
+        .balloon-string {
+            position: absolute; bottom: -35px; left: 50%; width: 2px; height: 30px;
+            background: rgba(0,0,0,0.15);
+        }
+
+        @keyframes flyUp {
+            0% { transform: translateY(0) translateX(0) scale(0.5); opacity: 0; }
+            15% { opacity: 0.95; transform: translateY(-10vh) translateX(10px) scale(1); }
+            85% { opacity: 0.95; }
+            100% { transform: translateY(-120vh) translateX(-30px) scale(0.9); opacity: 0; }
+        }
+
+        .floating-element { position: absolute; font-size: 24px; pointer-events: none; opacity: 0; animation: floatUp Ambient 7s linear infinite; bottom: -50px; z-index: 2; }
+        @keyframes floatUpAmbient {
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            100% { transform: translateY(-110vh) translateX(50px) rotate(360deg); opacity: 0; }
+            10% { opacity: 0.75; }
+            90% { opacity: 0.75; }
+            100% { transform: translateY(-115vh) translateX(60px) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
+
+    <div class="ambient-glow"></div>
 
     <audio id="bgMusic" loop>
         <source src="https://assets.mixkit.co/active_storage/sfx/123/123-200.wav" type="audio/wav">
@@ -189,19 +274,21 @@
     </div>
 
     <div class="celebration-container" id="celebrationScreen">
-        <svg class="bunting-banner" viewBox="0 0 300 50">
-            <polygon points="10,0 25,30 40,0" fill="#ff4d6d"/>
-            <polygon points="45,0 60,30 75,0" fill="#ff758f"/>
-            <polygon points="80,0 95,30 110,0" fill="#ffb3c6"/>
-            <polygon points="115,0 130,30 145,0" fill="#ffe5ec"/>
-            <polygon points="150,0 165,30 180,0" fill="#ff4d6d"/>
-            <polygon points="185,0 200,30 215,0" fill="#ff758f"/>
-            <polygon points="220,0 235,30 250,0" fill="#ffb3c6"/>
-            <polygon points="255,0 270,30 285,0" fill="#ffe5ec"/>
+        <svg class="acoustic-bunting" viewBox="0 0 300 45">
+            <polygon points="5,0 22,25 39,0" fill="#ff4d6d"/>
+            <polygon points="42,0 59,25 76,0" fill="#ff758f"/>
+            <polygon points="79,0 96,25 113,0" fill="#ffb3c6"/>
+            <polygon points="116,0 133,25 150,0" fill="#fff0f3"/>
+            <polygon points="153,0 170,25 187,0" fill="#ff4d6d"/>
+            <polygon points="190,0 207,25 224,0" fill="#ff758f"/>
+            <polygon points="227,0 244,25 261,0" fill="#ffb3c6"/>
+            <polygon points="264,0 281,25 298,0" fill="#fff0f3"/>
         </svg>
 
-        <h1 class="birthday-name">CHOMU</h1>
-        <p class="wish-text">Have a wonderful day! ✨</p>
+        <div class="birthday-title-wrap">
+            <span class="bday-prefix">Happy Birthday</span>
+            <h1 class="birthday-name">CHOMU</h1>
+        </div>
 
         <div class="cake-wrapper" id="cakeClickZone">
             <div class="candles-row">
@@ -213,7 +300,7 @@
             </div>
             <div class="cake">
                 <div class="frosting">
-                    <div class="drip"></div><div class="drip"></div><div class="drip"></div>
+                    <div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div>
                 </div>
             </div>
             <center><p class="instruction-tip" id="cakeTip">Tap the cake to blow out candles! 🎂</p></center>
@@ -225,14 +312,14 @@
     <div class="modal-overlay" id="proposalModal">
         <div class="card" id="mainCard">
             <span class="header-emojis">🦄🧸💖</span>
-            <h1 style="color: var(--text-main); font-size: 22px; margin-bottom: 15px;">Happy Birthday, My Best View! 🎉</h1>
+            <h1 style="color: var(--rose-gold); font-size: 23px; margin-bottom: 15px; font-weight: 800;">Happy Birthday, My Best View! 🎉</h1>
             
             <div class="image-container">
                 <img src="birthday.jpg" alt="💖" onerror="this.style.display='none'; document.getElementById('placeholder').classList.remove('hidden')">
-                <div id="placeholder" class="image-placeholder hidden" style="font-size: 50px;">🎂</div>
+                <div id="placeholder" class="image-placeholder hidden" style="font-size: 55px;">🎂</div>
             </div>
 
-            <p style="color: var(--text-dark); font-size: 15px; font-weight: 500; margin-bottom: 25px;">Will you go out on a magical birthday date with me? ✨</p>
+            <p style="color: #4a4e69; font-size: 15px; font-weight: 600; margin-bottom: 25px; line-height: 1.4;">Will you go out on a magical birthday date with me? ✨</p>
 
             <div class="btn-group">
                 <button class="btn btn-yes" id="yesBtn">Yes, absolutely! 🌸</button>
@@ -241,9 +328,9 @@
         </div>
 
         <div class="card hidden" id="successCard">
-            <span class="header-emojis" style="font-size: 60px;">🥳✨👑</span>
-            <h1 style="color: var(--text-dark); font-size: 26px; margin-top: 15px;">YAYYYYY! 🥰</h1>
-            <p style="margin-top: 15px; font-size: 16px; color: var(--text-dark)">Get ready for the best birthday ever! Prepared with honesty just for you. 🦄💖🎒</p>
+            <span class="header-emojis" style="font-size: 65px;">🥳✨👑</span>
+            <h1 style="color: var(--rose-gold); font-size: 28px; font-weight: 800;">YAYYYYY! 🥰</h1>
+            <p style="margin-top: 18px; font-size: 16px; color: #4a4e69; font-weight: 600; line-height: 1.5;">Get ready for the best birthday ever! Prepared with honesty just for you. 🦄💖🎒</p>
         </div>
     </div>
 
@@ -271,9 +358,17 @@
             if (userInput === CORRECT_NAME.toLowerCase()) {
                 passwordOverlay.classList.add('gate-unlocked');
                 celebrationScreen.classList.add('show');
-                // Optional audio activation track
-                bgMusic.play().catch(() => console.log("Audio waiting for user interaction layer."));
+                
+                // Audio activation guard
+                bgMusic.play().catch(() => console.log("Audio waiting for active track interaction."));
+                
+                // Trigger Ambient Sparkles
                 setInterval(createFloatingEmoji, 450);
+                
+                // MASSIVE PREMIUM BALLOON BLAST FROM BOTTOM ON SUCCESS
+                for(let i = 0; i < 25; i++) {
+                    setTimeout(createPremiumBalloon, i * 150);
+                }
             } else {
                 const randomLine = wrongAnswersList[Math.floor(Math.random() * wrongAnswersList.length)];
                 lockHeading.innerText = randomLine;
@@ -288,7 +383,7 @@
         enterBtn.addEventListener('click', checkPassword);
         passwordInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkPassword(); });
 
-        // Candle Blowing Out Logic
+        // Interactive Premium Candle System
         const cakeZone = document.getElementById('cakeClickZone');
         const flames = document.querySelectorAll('.flame');
         const cakeTip = document.getElementById('cakeTip');
@@ -297,14 +392,16 @@
         cakeZone.addEventListener('click', () => {
             if(candlesLit) {
                 flames.forEach(flame => flame.classList.add('blown-out'));
-                cakeTip.innerText = "Make a wish! Candles blown perfectly 🧁✨";
+                cakeTip.innerHTML = "Make a wish! Candles blown perfectly 🧁✨";
+                cakeTip.style.color = "#ff4d6d";
                 candlesLit = false;
-                // Add sudden blast of flower emojis
-                for(let i=0; i<15; i++) setTimeout(createFloatingEmoji, i * 40);
+                
+                // Flower blast on blowing candles
+                for(let i=0; i<20; i++) setTimeout(createFloatingEmoji, i * 50);
             }
         });
 
-        // Gift Modal Proposal Flow
+        // Gift Box Modal Flow Setup
         const giftBoxBtn = document.getElementById('giftBoxBtn');
         const proposalModal = document.getElementById('proposalModal');
         const noBtn = document.getElementById('noBtn');
@@ -312,43 +409,14 @@
         const mainCard = document.getElementById('mainCard');
         const successCard = document.getElementById('successCard');
 
-        giftBoxBtn.addEventListener('click', () => {
-            proposalModal.classList.add('open');
-        });
+        giftBoxBtn.addEventListener('click', () => { proposalModal.classList.add('open'); });
 
-        // Runaway button setup
+        // Perfect No-Runaway Button Trigger Engine
         noBtn.addEventListener('mouseover', moveNoButton);
         noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveNoButton(); });
 
         function moveNoButton() {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 40) + 20;
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 40) + 20;
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 50) + 25;
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 50) + 25;
             noBtn.style.position = 'fixed';
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
-        }
-
-        yesBtn.addEventListener('click', () => {
-            mainCard.classList.add('hidden');
-            successCard.classList.remove('hidden');
-            for(let i=0; i<35; i++) {
-                setTimeout(createFloatingEmoji, i * 40);
-            }
-        });
-
-        // Background floating components
-        const emojis = ['🌸', '💖', '🦄', '🧸', '✨', '🎈', '🎂', '🍓'];
-        function createFloatingEmoji() {
-            const emoji = document.createElement('div');
-            emoji.classList.add('floating-element');
-            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-            emoji.style.left = Math.random() * 100 + 'vw';
-            emoji.style.fontSize = Math.random() * (28 - 16) + 16 + 'px';
-            const duration = Math.random() * (7 - 4) + 4;
-            emoji.style.animationDuration = duration + 's';
-            document.body.appendChild(emoji);
-            setTimeout(() => { emoji.remove(); }, duration * 1000);
-        }
-    </script>
-</body>
-</html>
+            noBtn.style.left = x + 'px'
