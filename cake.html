@@ -7,8 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link href="https://fonts.googleapis.com/css?family=Signika:400,300,600,700" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="loading.css">
-	<link rel="stylesheet" href="stylesheet.css">
+	<link rel="stylesheet" href="loading.css?v=12.12">
+	<link rel="stylesheet" href="stylesheet.css?v=12.12">
 </head>
 
 <body>
@@ -26,24 +26,33 @@
 
 		<div class="row">
 			<div class="col-md-12 text-center">
-				<img src="bannar.png" class="bannar" alt="Birthday Banner">
+				<img src="bannar.png" onerror="this.src='https://i.postimg.co/N0M78Fm6/bannar.png'" class="bannar" alt="Birthday Banner">
 			</div>
 		</div>
 
-		<div class="balloons" id="b1"><img src="b1.png"><h2>C</h2></div>
-		<div class="balloons" id="b2"><img src="b2.png"><h2>H</h2></div>
-		<div class="balloons" id="b3"><img src="b3.png"><h2>O</h2></div>
-		<div class="balloons" id="b4"><img src="b4.png"><h2>M</h2></div>
-		<div class="balloons" id="b5"><img src="b5.png"><h2>U</h2></div>
+		<div class="balloons" id="b1" style="display:none;"><img src="b1.png" onerror="this.src='https://i.postimg.co/gJ6Xb2p1/b1.png'"><h2>C</h2></div>
+		<div class="balloons" id="b2" style="display:none;"><img src="b2.png" onerror="this.src='https://i.postimg.co/8CcXwYfL/b2.png'"><h2>H</h2></div>
+		<div class="balloons" id="b3" style="display:none;"><img src="b3.png" onerror="this.src='https://i.postimg.co/7bZgqZ9C/b3.png'"><h2>O</h2></div>
+		<div class="balloons" id="b4" style="display:none;"><img src="b4.png" onerror="this.src='https://i.postimg.co/JnHhV78X/b4.png'"><h2>M</h2></div>
+		<div class="balloons" id="b5" style="display:none;"><img src="b5.png" onerror="this.src='https://i.postimg.co/YCDmXzZ0/b5.png'"><h2>U</h2></div>
 
 		<div class="row cake-cover">
 			<div class="col-md-12 text-center">
-				<div class="cake">
-					<div class="velas">
-						<div class="fuego"></div>
+				<div class="cake-container">
+					<div class="cake-premium">
+						<div class="layer layer-top">
+							<div class="icing"></div>
+							<div class="drip drip1"></div>
+							<div class="drip drip2"></div>
+							<div class="drip drip3"></div>
+						</div>
+						<div class="layer layer-middle"></div>
+						<div class="layer layer-bottom"></div>
+						<div class="candle-premium">
+							<div class="flame" id="cake-flame"></div>
+						</div>
 					</div>
-					<div class="cobertura"></div>
-					<div class="bizcocho"></div>
+					<div class="cake-stand"></div>
 				</div>
 			</div>
 		</div>
@@ -79,7 +88,7 @@
 						<button class="btn btn-primary" id="bannar_coming" style="display:none;">Let's Decorate</button>
 						<button class="btn btn-primary" id="balloons_flying" style="display:none;">Fly With Balloons</button>
 						<button class="btn btn-primary" id="cake_fadein" style="display:none;">Delicious Cake</button>
-						<button class="btn btn-primary" id="light_candle" style="display:none;">Light Candle</button>
+						<button class="btn btn-primary" id="light_candle" style="display:none;">Blow The Candle 🎂</button>
 						<button class="btn btn-primary" id="wish_message" style="display:none;">Happy Birthday</button>
 						<button class="btn btn-primary" id="story" style="display:none;">A Most Beautiful Story</button>
 					</div>
@@ -88,12 +97,12 @@
 		</div>
 	</div>
 
-	<audio class="song" controls loop>
-		<source src="hbd.mp3" type="audio/mpeg">
+	<audio class="song" controls loop preload="auto">
+		<source src="hbd.mp3?v=12.12" type="audio/mpeg">
 	</audio>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	<script src="effect.js"></script>
+	<script src="effect.js?v=12.12"></script>
 </body>
 </html>
