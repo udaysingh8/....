@@ -1,20 +1,5 @@
-$(window).load(function(){
-	$('.loading').fadeOut('fast');
-	$('.container').fadeIn('fast');
-});
-
-$('document').ready(function(){
-	var vw;
-	
-	$(window).resize(function(){
-		vw = $(window).width()/2;
-		$('#b1,#b2,#b3,#b4,#b5').stop();
-		$('#b11').animate({top:240, left: vw-200},500);
-		$('#b22').animate({top:240, left: vw-100},500);
-		$('#b33').animate({top:240, left: vw-0},500);
-		$('#b44').animate({top:240, left: vw+100},500);
-		$('#b55').animate({top:240, left: vw+200},500);
-	});
+$(document).ready(function(){
+	var audio = $('.song')[0];
 
 	// 1. Turn On Lights
 	$('#turn_on').click(function(){
@@ -25,152 +10,132 @@ $('document').ready(function(){
 		$('#bulb_pink').addClass('bulb-glow-pink');
 		$('#bulb_orange').addClass('bulb-glow-orange');
 		$('body').addClass('peach');
-		$(this).fadeOut('slow').delay(5000).promise().done(function(){
+		$(this).fadeOut('slow', function(){
 			$('#play').fadeIn('slow');
 		});
 	});
 
 	// 2. Play Music
 	$('#play').click(function(){
-		var audio = $('.song')[0];
 		audio.play();
+		$('.bulb').removeClass().addClass('bulb');
 		$('#bulb_yellow').addClass('bulb-glow-yellow-after');
 		$('#bulb_red').addClass('bulb-glow-red-after');
 		$('#bulb_blue').addClass('bulb-glow-blue-after');
 		$('#bulb_green').addClass('bulb-glow-green-after');
 		$('#bulb_pink').addClass('bulb-glow-pink-after');
 		$('#bulb_orange').addClass('bulb-glow-orange-after');
-		$('body').css('background-color','#FFF');
 		$('body').addClass('peach-after');
-		$(this).fadeOut('slow').delay(6000).promise().done(function(){
+		$(this).fadeOut('slow', function(){
 			$('#bannar_coming').fadeIn('slow');
 		});
 	});
 
-	// 3. Let's Decorate Banner
+	// 3. Banner Entry
 	$('#bannar_coming').click(function(){
 		$('.bannar').addClass('bannar-come');
-		$(this).fadeOut('slow').delay(6000).promise().done(function(){
+		$(this).fadeOut('slow', function(){
 			$('#balloons_flying').fadeIn('slow');
 		});
 	});
 
-	// Balloon Flying Loops (Neeche se upar continuous animation)
+	// 4. Balloons Flying
 	function loopOne() {
-		var randleft = Math.random() * ($(window).width() - 80);
-		var randtop = Math.random() * ($(window).height() - 100);
-		$('#b1').show().animate({left:randleft, bottom: $(window).height() + 150}, 12000, function(){
-			$(this).css('bottom', '-150px');
+		var randleft = Math.random()*$(window).width();
+		var randtop = Math.random()*20;
+		$('#b1').css({left:randleft,bottom:randtop});
+		$('#b1').animate({top:-200,left:randleft-100},10000,function(){
 			loopOne();
 		});
 	}
 	function loopTwo() {
-		var randleft = Math.random() * ($(window).width() - 80);
-		var randtop = Math.random() * ($(window).height() - 100);
-		$('#b2').show().animate({left:randleft, bottom: $(window).height() + 150}, 11000, function(){
-			$(this).css('bottom', '-150px');
+		var randleft = Math.random()*$(window).width();
+		var randtop = Math.random()*20;
+		$('#b2').css({left:randleft,bottom:randtop});
+		$('#b2').animate({top:-200,left:randleft+50},9000,function(){
 			loopTwo();
 		});
 	}
 	function loopThree() {
-		var randleft = Math.random() * ($(window).width() - 80);
-		var randtop = Math.random() * ($(window).height() - 100);
-		$('#b3').show().animate({left:randleft, bottom: $(window).height() + 150}, 10000, function(){
-			$(this).css('bottom', '-150px');
+		var randleft = Math.random()*$(window).width();
+		var randtop = Math.random()*20;
+		$('#b3').css({left:randleft,bottom:randtop});
+		$('#b3').animate({top:-200,left:randleft-50},11000,function(){
 			loopThree();
 		});
 	}
 	function loopFour() {
-		var randleft = Math.random() * ($(window).width() - 80);
-		var randtop = Math.random() * ($(window).height() - 100);
-		$('#b4').show().animate({left:randleft, bottom: $(window).height() + 150}, 13000, function(){
-			$(this).css('bottom', '-150px');
+		var randleft = Math.random()*$(window).width();
+		var randtop = Math.random()*20;
+		$('#b4').css({left:randleft,bottom:randtop});
+		$('#b4').animate({top:-200,left:randleft+100},8500,function(){
 			loopFour();
 		});
 	}
 	function loopFive() {
-		var randleft = Math.random() * ($(window).width() - 80);
-		var randtop = Math.random() * ($(window).height() - 100);
-		$('#b5').show().animate({left:randleft, bottom: $(window).height() + 150}, 9000, function(){
-			$(this).css('bottom', '-150px');
+		var randleft = Math.random()*$(window).width();
+		var randtop = Math.random()*20;
+		$('#b5').css({left:randleft,bottom:randtop});
+		$('#b5').animate({top:-200,left:randleft-80},10500,function(){
 			loopFive();
 		});
 	}
 
-	// 4. Fly With Balloons
 	$('#balloons_flying').click(function(){
 		$('.balloons').fadeIn('slow');
-		$('#b1,#b4,#b5').addClass('balloons-rotate-behaviour-one');
-		$('#b2,#b3').addClass('balloons-rotate-behaviour-two');
-		
+		$('.balloons').addClass('balloons-rotate-behaviour-one');
 		loopOne();
 		loopTwo();
 		loopThree();
 		loopFour();
 		loopFive();
-		
-		$(this).fadeOut('slow').delay(5000).promise().done(function(){
+		$(this).fadeOut('slow', function(){
 			$('#cake_fadein').fadeIn('slow');
 		});
-	});	
+	});
 
-	// 5. Cake Fade In
+	// 5. Cake FadeIn
 	$('#cake_fadein').click(function(){
 		$('.cake-cover').fadeIn('slow');
-		$(this).fadeOut('slow').delay(3000).promise().done(function(){
+		$(this).fadeOut('slow', function(){
 			$('#light_candle').fadeIn('slow');
 		});
 	});
 
-	// 6. Light Candle
+	// 6. Modified: Blow the Candle Action
 	$('#light_candle').click(function(){
-		$('.fuego').fadeIn('slow');
-		$(this).fadeOut('slow').promise().done(function(){
+		// Flame ko gayab karega 
+		$('#cake-flame').addClass('blown-out');
+		$(this).fadeOut('slow', function(){
 			$('#wish_message').fadeIn('slow');
 		});
 	});
 
-	// 7. Happy Birthday (Align Balloons to Center)
+	// 7. Happy Birthday Message Wish
 	$('#wish_message').click(function(){
-		vw = $(window).width()/2;
-		$('#b1,#b2,#b3,#b4,#b5').stop();
-		
-		$('#b1').attr('id','b11');
-		$('#b2').attr('id','b22');
-		$('#b3').attr('id','b33');
-		$('#b4').attr('id','b44');
-		$('#b5').attr('id','b55');
-		
-		$('#b11').animate({top:220, left: vw-180},500);
-		$('#b22').animate({top:220, left: vw-90},500);
-		$('#b33').animate({top:220, left: vw-0},500);
-		$('#b44').animate({top:220, left: vw+90},500);
-		$('#b55').animate({top:220, left: vw+180},500);
-		
-		$('.balloons').css('opacity','0.9');
-		$(this).fadeOut('slow').delay(3000).promise().done(function(){
+		$('.bannar').addClass('bannar-come');
+		$(this).fadeOut('slow', function(){
 			$('#story').fadeIn('slow');
 		});
 	});
-	
-	// 8. Story Message Loop
+
+	// 8. Story Scrolling Text
 	$('#story').click(function(){
 		$(this).fadeOut('slow');
-		$('.cake-cover').fadeOut('fast').promise().done(function(){
-			$('.message').fadeIn('slow');
-		});
+		$('.cake-cover').fadeOut('slow');
+		$('.bannar').fadeOut('slow');
+		$('.message').fadeIn('slow');
 		
-		var i = 1;
-		function msgLoop (i) {
-			$("p:nth-child("+i+")").fadeIn('slow').delay(2000).fadeOut('slow').promise().done(function(){
-				i = i + 1;
-				if(i == 50 || $("p:nth-child("+i+")").length == 0){
-					$('.message').fadeOut('slow', function(){
-						$('.cake-cover').fadeIn('fast');
-					});
+		function msgLoop(i) {
+			$("p:nth-child("+i+")").fadeIn('slow').delay(2000).fadeOut('slow', function(){
+				if(i < 18) {
+					msgLoop(i+1);
 				} else {
-					msgLoop(i);
-				}			
+					$('.message').fadeOut('slow', function(){
+						$('.cake-cover').fadeIn('slow');
+						$('.bannar').fadeIn('slow');
+					});
+				}
 			});
 		}
 		msgLoop(1);
