@@ -1,10 +1,12 @@
-// Pure JavaScript Loading Fix - Yeh browser memory/clash bypass karega
-window.addEventListener("load", function() {
-    $('.loading').fadeOut('fast');
-    $('.container').fadeIn('slow');
-});
-
+// FORCE BYPASS LOADING SCREEN (1.5 Seconds Timeout Fix)
 $(document).ready(function(){
+    // Jaise hi HTML ready hoga, 1.5 second me loading automatic hat jayegi
+    setTimeout(function(){
+        $('.loading').fadeOut('fast', function(){
+            $('.container').fadeIn('slow');
+        });
+    }, 1500);
+
 	var audio = $('.song')[0];
 
 	// 1. Turn On Lights
@@ -108,7 +110,7 @@ $(document).ready(function(){
 		});
 	});
 
-	// 6. Modified Blow Candle Option
+	// 6. Blow the Candle Action
 	$('#light_candle').click(function(){
 		$('#cake-flame').addClass('blown-out');
 		$(this).fadeOut('slow', function(){
