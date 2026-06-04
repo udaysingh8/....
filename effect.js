@@ -1,7 +1,7 @@
-$(window).load(function(){
-	// Jaise hi page load hoga, loading icon automatic hat jayega
-	$('.loading').fadeOut('fast');
-	$('.container').fadeIn('slow');
+// Pure JavaScript Loading Fix - Yeh browser memory/clash bypass karega
+window.addEventListener("load", function() {
+    $('.loading').fadeOut('fast');
+    $('.container').fadeIn('slow');
 });
 
 $(document).ready(function(){
@@ -108,7 +108,7 @@ $(document).ready(function(){
 		});
 	});
 
-	// 6. Blow the Candle Action
+	// 6. Modified Blow Candle Option
 	$('#light_candle').click(function(){
 		$('#cake-flame').addClass('blown-out');
 		$(this).fadeOut('slow', function(){
