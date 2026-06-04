@@ -60,7 +60,7 @@ body {
 	100% { opacity: 1; }
 }
 
-/* Bulb Flashing Animations (After Music Starts) */
+/* Bulb Flashing Animations */
 .bulb-glow-yellow-after { background-image: url('bulb_yellow.png'); animation: flash_y linear 1s infinite; }
 .bulb-glow-red-after    { background-image: url('bulb_red.png');    animation: flash_r linear 1.2s infinite; }
 .bulb-glow-blue-after   { background-image: url('bulb_blue.png');   animation: flash_b linear 1.4s infinite; }
@@ -76,13 +76,15 @@ body {
 @keyframes flash_o { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
 
 /* ==========================================
-   3. DECORATION BANNERS
+   3. DECORATION BANNERS (FORCE TRANSPARENT)
    ========================================== */
 .bannar {
 	max-width: 90%;
 	margin: 20px auto 0 auto;
 	display: block;
 	transform: translate(0px, -600px);
+	/* Magic Line: Yeh white corners ko hatayega */
+	mix-blend-mode: multiply !important; 
 }
 
 .bannar-come {
@@ -97,12 +99,12 @@ body {
 }
 
 /* ==========================================
-   4. BALLOONS (MOBILE FRIENDLY FIXED SIZE)
+   4. BALLOONS (PERFECT SIZE & FORCE TRANSPARENT)
    ========================================== */
 .balloons {
 	position: fixed;
-	bottom: -200px; /* Shuru me screen ke neeche chupe rahenge */
-	display: none;  /* Shuru me hidden */
+	bottom: -200px; 
+	display: none;  
 	opacity: 0.9;
 	z-index: 99;
 	width: 75px !important;
@@ -113,6 +115,8 @@ body {
 	width: 100% !important;
 	height: 100% !important;
 	object-fit: contain !important;
+	/* Magic Line: Fake PNG ka white background transparent karne ke liye */
+	mix-blend-mode: multiply !important; 
 }
 
 .balloons h2 {
