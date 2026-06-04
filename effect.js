@@ -1,3 +1,9 @@
+$(window).load(function(){
+	// Jaise hi page load hoga, loading icon automatic hat jayega
+	$('.loading').fadeOut('fast');
+	$('.container').fadeIn('slow');
+});
+
 $(document).ready(function(){
 	var audio = $('.song')[0];
 
@@ -102,9 +108,8 @@ $(document).ready(function(){
 		});
 	});
 
-	// 6. Modified: Blow the Candle Action
+	// 6. Blow the Candle Action
 	$('#light_candle').click(function(){
-		// Flame ko gayab karega 
 		$('#cake-flame').addClass('blown-out');
 		$(this).fadeOut('slow', function(){
 			$('#wish_message').fadeIn('slow');
