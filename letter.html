@@ -28,14 +28,14 @@
             background-image: linear-gradient(#f4edd2 1px, transparent 1px); /* Old Notebook Lines */
             background-size: 100% 45px;
             border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15), inset 0 0 40px rgba(220,200,170,0.5); /* Burnt paper edges look */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15), inset 0 0 40px rgba(220,200,170,0.5); 
             padding: 50px 30px;
             width: 100%;
             max-width: 500px;
             min-height: 550px;
             position: relative;
             border: 1px solid #eadeb8;
-            margin-bottom: 80px; /* Space for the bottom button */
+            margin-bottom: 80px; 
         }
 
         /* Top Red Heart Clip on Page */
@@ -56,20 +56,20 @@
 
         /* Romantic Handwriting Lines */
         .letter-content p {
-            font-family: 'Caveat', cursive; /* Beautiful Cursive Handwriting Font */
+            font-family: 'Caveat', cursive; 
             font-size: 28px !important;
             color: #4a3b32 !important; /* Vintage Ink Color */
-            line-height: 45px !important; /* Matches line height of notebook lines */
+            line-height: 45px !important; 
             margin: 0 0 45px 0 !important;
             text-align: left;
             padding-left: 15px;
-            display: none; /* Initially hidden for typewriter style entry */
+            display: none; 
             font-weight: 700;
         }
 
         /* Special Styling for the Final Line */
         .letter-content p:last-child {
-            color: #d60036 !important; /* Pure Rose Red for final HBD */
+            color: #d60036 !important; 
             font-size: 32px !important;
             text-align: center;
             padding-left: 0;
@@ -107,9 +107,18 @@
             transform: scale(1.05);
             outline: none;
         }
+
+        /* Invisible audio panel */
+        .letter-song {
+            display: none;
+        }
     </style>
 </head>
 <body>
+
+    <audio class="letter-song" id="bg-music" loop preload="auto">
+        <source src="hbd.mp3?v=12.12" type="audio/mpeg">
+    </audio>
 
     <div class="vintage-letter">
         <div class="letter-content">
@@ -140,21 +149,33 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-            // Total jitni lines hain unhe calculate karne ke liye
+            // --- AUDIO AUTO-PLAY CONTROLLER ---
+            var audio = document.getElementById('bg-music');
+            
+            // Jaise hi page load ho, audio play karne ki koshish karo
+            if (audio) {
+                audio.play().catch(function(error) {
+                    // Agar browser block kare, toh screen par kahi bhi pehle click par play ho jayega
+                    console.log("Autoplay blocked, waiting for user interaction.");
+                    $('body').one('click', function() {
+                        audio.play();
+                    });
+                });
+            }
+
+            // --- TEXT TYPING SEQUENCE ---
             var totalLines = $(".letter-content p").length;
             
-            // Sequential fade-in logic jo purane text ko permanently screen par rokta hai
             function revealVintageLines(i) {
                 $(".letter-content p:nth-child(" + i + ")").fadeIn(1800, function(){
                     if (i <= totalLines) {
                         setTimeout(function(){
                             revealVintageLines(i + 1);
-                        }, 1200); // 1.2 seconds ka gap har line ke beech me
+                        }, 1200); 
                     }
                 });
             }
 
-            // Page load hone ke 1 second baad writing sequence shuru hoga
             setTimeout(function(){
                 revealVintageLines(1);
             }, 1000);
