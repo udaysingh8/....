@@ -8,96 +8,119 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
     <style>
-        /* Acoustic & Romantic Vintage Background Setup */
+        /* Enhanced Aesthetic Acoustic Background */
         body {
-            background: #f5eae1 !important; /* Soft Acoustic Beige Color */
-            background-image: radial-gradient(rgba(255, 182, 193, 0.4) 15%, transparent 15%) !important;
+            background: #f3e5d8 !important; /* Richer Acoustic Beige */
+            background-image: radial-gradient(rgba(255, 182, 193, 0.5) 15%, transparent 15%) !important;
             background-size: 40px 40px !important;
             font-family: 'Signika', sans-serif;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
-            padding: 20px;
+            padding: 30px 15px;
             overflow-x: hidden;
         }
 
-        /* Old Vintage Paper / Letter Design */
-        .vintage-letter {
-            background: #fffdf6; /* Old Parchment Paper Tint */
-            background-image: linear-gradient(#f4edd2 1px, transparent 1px); /* Old Notebook Lines */
-            background-size: 100% 45px;
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15), inset 0 0 40px rgba(220,200,170,0.5); 
-            padding: 50px 30px;
+        /* Top Media Container Style */
+        .top-media-container {
             width: 100%;
-            max-width: 500px;
-            min-height: 550px;
-            position: relative;
-            border: 1px solid #eadeb8;
-            margin-bottom: 80px; 
+            max-width: 180px;
+            margin-bottom: -20px; /* Overlaps perfectly with paper clip */
+            z-index: 10;
+            text-center: center;
         }
 
-        /* Top Red Heart Clip on Page */
+        .top-media-container video {
+            width: 100%;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 6px;
+            box-shadow: 0 10px 25px rgba(74, 59, 50, 0.2);
+        }
+
+        /* Premium Vintage Parchment Paper Design */
+        .vintage-letter {
+            background: #fffef9; 
+            background-image: linear-gradient(#f6f0d8 1px, transparent 1px); /* Subtly sharper notebook lines */
+            background-size: 100% 45px;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(74, 59, 50, 0.2), 
+                        inset 0 0 50px rgba(210, 185, 150, 0.45); /* Elegant aged paper edges */
+            padding: 60px 25px 40px 25px;
+            width: 100%;
+            max-width: 500px;
+            min-height: 600px;
+            position: relative;
+            border: 1px solid #e6dca9;
+            margin-bottom: 100px; /* Seamless scrolling padding for long texts */
+            margin-top: 30px;
+        }
+
+        /* Heart Clip Alignment */
         .vintage-letter::before {
             content: "❤️";
             position: absolute;
-            top: -15px;
+            top: -18px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 30px;
-            text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            font-size: 32px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            z-index: 12;
         }
 
-        /* Letter Box Container inside Row */
         .letter-content {
-            padding-top: 20px;
+            padding-top: 15px;
         }
 
-        /* Romantic Handwriting Lines */
+        /* Cursive Ink Font Styling */
         .letter-content p {
             font-family: 'Caveat', cursive; 
             font-size: 28px !important;
-            color: #4a3b32 !important; /* Vintage Ink Color */
-            line-height: 45px !important; 
+            color: #3d312a !important; /* Premium Dark Sepia Ink */
+            line-height: 45px !important; /* Perfectly maps with page lines */
             margin: 0 0 45px 0 !important;
             text-align: left;
-            padding-left: 15px;
-            display: none; 
+            padding-left: 10px;
+            padding-right: 10px;
+            display: none; /* Auto typing reveal trigger */
             font-weight: 700;
+            word-wrap: break-word;
         }
 
-        /* Special Styling for the Final Line */
+        /* Final Line Red Rose Accent */
         .letter-content p:last-child {
             color: #d60036 !important; 
-            font-size: 32px !important;
+            font-size: 34px !important;
             text-align: center;
             padding-left: 0;
-            margin-top: 60px !important;
+            margin-top: 75px !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
 
-        /* Fixed Bottom Return Button Styling */
+        /* Bottom Sticky Navigation Panel */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(transparent, #f5eae1 40%);
-            padding: 20px 0;
+            background: linear-gradient(transparent, #f3e5d8 50%);
+            padding: 25px 0;
             text-align: center;
             z-index: 100;
         }
 
         .btn-back {
-            background: #4a3b32;
-            color: #fffdf6;
+            background: #3d312a;
+            color: #fffef9;
             font-family: 'Signika', sans-serif;
             font-size: 18px;
             font-weight: 600;
-            padding: 12px 35px;
+            padding: 12px 40px;
             border: none;
             border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(74,59,50,0.3);
+            box-shadow: 0 6px 20px rgba(74, 59, 50, 0.35);
             transition: all 0.3s ease;
         }
 
@@ -108,7 +131,6 @@
             outline: none;
         }
 
-        /* Invisible audio panel */
         .letter-song {
             display: none;
         }
@@ -117,8 +139,14 @@
 <body>
 
     <audio class="letter-song" id="bg-music" loop preload="auto">
-        <source src="hbd.mp3?v=12.12" type="audio/mpeg">
+        <source src="hbd.mp3?v=13.13" type="audio/mpeg">
     </audio>
+
+    <div class="top-media-container">
+        <video autoplay loop muted playsinline id="looking-video">
+            <source src="Looking.mp4" type="video/mp4">
+        </video>
+    </div>
 
     <div class="vintage-letter">
         <div class="letter-content">
@@ -149,25 +177,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-            // --- AUDIO AUTO-PLAY CONTROLLER ---
+            // --- AUDIO MULTI-PAGE CONTROLLER ---
             var audio = document.getElementById('bg-music');
-            
-            // Jaise hi page load ho, audio play karne ki koshish karo
             if (audio) {
                 audio.play().catch(function(error) {
-                    // Agar browser block kare, toh screen par kahi bhi pehle click par play ho jayega
-                    console.log("Autoplay blocked, waiting for user interaction.");
+                    console.log("Autoplay blocked, waiting for click interaction.");
                     $('body').one('click', function() {
                         audio.play();
                     });
                 });
             }
 
-            // --- TEXT TYPING SEQUENCE ---
+            // --- LOOKING VIDEO FORCE PLAY BACK ---
+            var video = document.getElementById('looking-video');
+            if (video) {
+                video.play().catch(function(e) { console.log("Video interaction hold"); });
+            }
+
+            // --- SCROLLING TYPING SEQUENCE ---
             var totalLines = $(".letter-content p").length;
             
             function revealVintageLines(i) {
-                $(".letter-content p:nth-child(" + i + ")").fadeIn(1800, function(){
+                var currentLine = $(".letter-content p:nth-child(" + i + ")");
+                
+                currentLine.fadeIn(1800, function(){
+                    // Lamba letter hone par automatic screen screen lines ke saath scroll karegi
+                    if(i > 4) {
+                        $('html, body').animate({
+                            scrollTop: currentLine.offset().top - 250
+                        }, 500);
+                    }
+                    
                     if (i <= totalLines) {
                         setTimeout(function(){
                             revealVintageLines(i + 1);
@@ -176,6 +216,7 @@
                 });
             }
 
+            // Init delay
             setTimeout(function(){
                 revealVintageLines(1);
             }, 1000);
