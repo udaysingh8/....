@@ -9,6 +9,48 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="loading.css?v=12.12">
 	<link rel="stylesheet" href="stylesheet.css?v=12.12">
+
+	<!-- ROMANTIC THEME STYLE OVERRIDE (Bina purani CSS ko chhede) -->
+	<style>
+		/* Birthday wishes text ko beautiful aur romantic banane ke liye */
+		.message p {
+			font-size: 26px !important; 
+			color: #ff3366 !important; /* Soft Rose Red Color */
+			font-family: 'Signika', sans-serif;
+			font-weight: 600 !important;
+			text-shadow: 0 0 8px rgba(255, 51, 102, 0.4), 1px 1px 2px rgba(0,0,0,0.1) !important; 
+			line-height: 1.8 !important;
+			margin-bottom: 25px !important;
+			text-align: center;
+		}
+		/* Final Message ke liye special bada style */
+		.message p:last-child {
+			font-size: 32px !important;
+			color: #e60045 !important;
+			font-weight: 700 !important;
+			text-shadow: 0 0 15px rgba(230, 0, 69, 0.6) !important;
+		}
+		/* GIF container setting */
+		.custom-gif-container {
+			position: fixed;
+			top: 25%; 
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 105;
+			display: none; 
+		}
+		.custom-gif-container img {
+			max-width: 180px; 
+			border-radius: 15px;
+			box-shadow: 0 8px 20px rgba(255, 51, 102, 0.3); 
+		}
+		/* Text ko permanent screen par rokne aur scroll ke liye */
+		.message {
+			padding: 20px !important;
+			height: auto !important; 
+			overflow: visible !important; 
+		}
+	</style>
 </head>
 
 <body>
@@ -36,6 +78,7 @@
 		<div class="balloons" id="b4" style="display:none;"><img src="b4.png" onerror="this.src='https://i.postimg.co/JnHhV78X/b4.png'"><h2>M</h2></div>
 		<div class="balloons" id="b5" style="display:none;"><img src="b5.png" onerror="this.src='https://i.postimg.co/YCDmXzZ0/b5.png'"><h2>U</h2></div>
 
+		<!-- Original Cake Layout Unchanged -->
 		<div class="row cake-cover">
 			<div class="col-md-12 text-center">
 				<div class="cake-container">
@@ -104,5 +147,48 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	<script src="effect.js?v=12.12"></script>
+
+	<!-- ROMANTIC PERMANENT TEXT & GIF LOGIC INJECTOR -->
+	<script>
+		$(document).ready(function(){
+			// 1. GIF Layout setup
+			var gifHtml = '<div class="custom-gif-container" id="birthday-gif">' +
+						  '<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWdtcmN0Z3I3d296YnZid3V1ZXp5am95bXN0Ym15bXN0Ym15bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/McTyI6RI6gGOYg68u9/giphy.gif">' +
+						  '</div>';
+			$('body').append(gifHtml);
+
+			// 2. Loading Screen Timeout bypass (1.5 seconds maximum)
+			setTimeout(function(){
+				$('.loading').fadeOut('fast', function(){
+					$('.container').fadeIn('slow');
+				});
+			}, 1500);
+
+			// 3. Blow Candle element tracking
+			$('#light_candle').click(function(){
+				$('#cake-flame').hide(); 
+			});
+
+			// 4. Overriding Story function to stack lines permanently 
+			$('#story').unbind('click').click(function(){
+				$(this).fadeOut('slow');
+				$('.cake-cover').fadeOut('slow');
+				$('.bannar').fadeOut('slow');
+				$('#birthday-gif').fadeOut('fast');
+				$('.message').fadeIn('slow');
+				
+				function showRomanticLines(i) {
+					$("p:nth-child("+i+")").fadeIn(1500, function(){
+						if(i < 18) {
+							setTimeout(function(){
+								showRomanticLines(i+1);
+							}, 1500);
+						}
+					});
+				}
+				showRomanticLines(1);
+			});
+		});
+	</script>
 </body>
 </html>
